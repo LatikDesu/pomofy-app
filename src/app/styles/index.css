@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+	html {
+		font-family: 'Montserrat', sans-serif;
+	}
+}
+
+@layer utilities {
+	.font-montserrat {
+		font-family: 'Montserrat', sans-serif;
+	}
+}
+
+:root {
+	--color-default: #36322f;
+	--color-default-hover: #4a4542;
+	--color-default-disabled: #8c8885;
+	--color-default-active: #2a2724;
+	--color-default-border: #8c8885;
+
+	--color-primary: #2c7be5;
+	--color-primary-hover: #3d8df5;
+	--color-primary-disabled: #9fc3f5;
+	--color-primary-active: #1a68d1;
+
+	--color-secondary: #ffffff;
+	--color-secondary-hover: #f8f8f8;
+	--color-secondary-disabled: #f0f0f0;
+	--color-secondary-active: #f0f0f0;
+	--color-secondary-border: #e0e0e0;
+
+	--color-danger: #e6492d;
+	--color-danger-hover: #f05b41;
+	--color-danger-disabled: #f5a799;
+	--color-danger-active: #d63a1f;
+
+	--text-default: #ffffff;
+	--text-secondary: #36322f;
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.dwidth {
+	width: 18rem;
+	@media (min-width: 640px) {
+		width: 24rem;
+	}
+}

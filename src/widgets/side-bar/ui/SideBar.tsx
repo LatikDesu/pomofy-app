@@ -1,0 +1,225 @@
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
+import { useState } from 'react'
+import { BsArrowsFullscreen } from 'react-icons/bs'
+import { CgNotes } from 'react-icons/cg'
+import { IoMenu } from 'react-icons/io5'
+import { MdDarkMode, MdOutlineTimer, MdWbSunny } from 'react-icons/md'
+
+import { toggleFullScreen } from '@/shared/lib/fullscreen'
+import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
+
+import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
+
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
+// import { defaultToast } from "@/shared/lib/toast"
+import { useToggleTasks } from '@/entities/Task'
+import { useToggleTimer } from '@/entities/Timer'
+
+export const SideBar = () => {
+	const [active, setActive] = useState(false)
+	const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore()
+	const { isFullscreen, isFullscreenShown, toggleFullscreenMode } = useFullScreenToggleStore()
+	const { isDark, toggleDarkMode, isDarkModeShown } = useDarkToggleStore()
+	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
+	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
+	let theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
+
+	const sideNavItems = [
+		// {
+		//   id: "1",
+		//   content: <IoMusicalNotesOutline className="h-6 w-6" />,
+		//   tooltipTitle: "Lofi Music",
+		//   isToggled: isMusicToggled,
+		//   setToggled: setIsMusicToggled,
+		//   toggleString: "Music Toggled",
+		//   toggleIcon: "🎵",
+		//   isShown: isMusicShown,
+		// },
+		// {
+		//   id: "2",
+		//   content: <FaSpotify className="h-6 w-6" />,
+		//   tooltipTitle: "Spotify",
+		//   isToggled: isSpotifyToggled,
+		//   setToggled: setIsSpotifyToggled,
+		//   toggleString: "Spotify Toggled",
+		//   toggleIcon: "🎧",
+		//   isShown: isSpotifyShown,
+		// },
+		{
+			id: '3',
+			content: <CgNotes className='h-6 w-6' />,
+			tooltipTitle: 'Трекер задач',
+			isToggled: isTasksToggled,
+			setToggled: setIsTasksToggled,
+			toggleString: 'Трекер задач',
+			toggleIcon: '📓',
+			isShown: isTasksShown
+		},
+		{
+			id: '4',
+			content: <MdOutlineTimer className='h-6 w-6' />,
+			tooltipTitle: 'Таймер',
+			isToggled: isTimerToggled,
+			setToggled: setIsTimerToggled,
+			toggleString: 'Таймер',
+			toggleIcon: '⏳',
+			isShown: isTimerShown
+		},
+		// {
+		//   id: "5",
+		//   content: <MdOutlineNoteAdd className="h-6 w-6" />,
+		//   tooltipTitle: "Sticky Note",
+		//   isToggled: stickyNotes.length > 0,
+		//   setToggled: addNewStickyNote,
+		//   toggleString: "Sticky Note Toggled",
+		//   toggleIcon: "📝",
+		//   isShown: isStickyNoteShown,
+		// },
+		// {
+		//   id: "6",
+		//   content: <VscDebugRestartFrame className="h-6 w-6" />,
+		//   tooltipTitle: "Reset Positions",
+		//   isToggled: false,
+		//   setToggled: toggleDefaultPositions,
+		//   toggleString: "Reset Toggled",
+		//   toggleIcon: "⏪",
+		//   isShown: isWidgetResetShown,
+		// },
+		{
+			id: '7',
+			content: theme,
+			tooltipTitle: 'Тема',
+			isToggled: isDark,
+			setToggled: toggleDarkMode,
+			toggleString: 'Темная тема',
+			toggleIcon: '🌙',
+			isShown: isDarkModeShown
+		},
+		// {
+		//   id: "8",
+		//   content: <BsFillChatLeftQuoteFill className="h-6 w-6" />,
+		//   tooltipTitle: "Quotes",
+		//   isToggled: isQuoteToggled,
+		//   setToggled: setIsQuoteToggled,
+		//   toggleString: "Quotes Toggled",
+		//   toggleIcon: "💬",
+		//   isShown: isQuoteShown,
+		// },
+		// {
+		//   id: "9",
+		//   content: <BsTwitch className="h-6 w-6" />,
+		//   tooltipTitle: "Twitch Stream",
+		//   isToggled: isTwitchToggled,
+		//   setToggled: setIsTwitchToggled,
+		//   toggleString: "Twitch Toggled",
+		//   toggleIcon: "📺",
+		//   isShown: isTwitchShown,
+		// },
+		{
+			id: '10',
+			content: <BsArrowsFullscreen className='h-6 w-6' />,
+			tooltipTitle: 'Fullscreen',
+			isToggled: isFullscreen,
+			setToggled: () => {
+				toggleFullScreen()
+				toggleFullscreenMode()
+			},
+			toggleString: 'Fullscreen Toggled',
+			toggleIcon: '',
+			isShown: isFullscreenShown
+		}
+		// {
+		//   id: "11",
+		//   content: <MdOutlineViewKanban className="h-6 w-6" />,
+		//   tooltipTitle: "Kanban",
+		//   isToggled: isKanbanToggled,
+		//   setToggled: setIsKanbanToggled,
+		//   toggleString: "Kanban Toggled",
+		//   toggleIcon: "📃",
+		//   isShown: isKanbanShown,
+		// },
+		// {
+		//   id: "12",
+		//   content: <BsYoutube className="h-6 w-6" />,
+		//   tooltipTitle: "Youtube Video",
+		//   isToggled: isYoutubeToggled,
+		//   setToggled: setIsYoutubeToggled,
+		//   toggleString: "Youtube Toggled",
+		//   toggleIcon: "▶️",
+		//   isShown: isYoutubeShown,
+		// },
+	]
+
+	// function toggleDefaultPositions() {
+	// 	setDefault()
+	// 	defaultToast("Positions reset")
+	// }
+
+	function toggleNavBar() {
+		setActive(oldDate => !oldDate)
+	}
+
+	const reorder = (list: number[], startIndex: number, endIndex: number): number[] => {
+		const result = Array.from(list)
+		const [removed] = result.splice(startIndex, 1)
+		result.splice(endIndex, 0, removed)
+		return result
+	}
+
+	function onDragEnd(result: any) {
+		if (!result.destination) {
+			return
+		}
+
+		setSideNavOrder(reorder(sideNavOrder, result.source.index, result.destination.index))
+	}
+
+	return (
+		<div className='sideNav absolute flex p-2'>
+			<aside className='flex flex-col overflow-hidden rounded-md'>
+				<ul>
+					<div className='sm:hidden'>
+						<SideBarItem onClick={toggleNavBar} shown={true}>
+							<IoMenu className='h-6 w-6' />
+						</SideBarItem>
+					</div>
+					<DragDropContext onDragEnd={onDragEnd}>
+						<Droppable droppableId='droppable'>
+							{provided => (
+								<div {...provided.droppableProps} ref={provided.innerRef}>
+									{sideNavOrder &&
+										sideNavOrder.map &&
+										sideNavOrder.map((id, index) => {
+											const item = sideNavItems[id]
+											if (!item) return
+
+											return (
+												<Draggable
+													key={item.id}
+													draggableId={String(item.id)}
+													index={index}
+													disableInteractiveElementBlocking={true}
+												>
+													{provided => (
+														<div
+															ref={provided.innerRef}
+															{...provided.draggableProps}
+															{...provided.dragHandleProps}
+														>
+															<DraggableNavItem active={active} item={item} />
+														</div>
+													)}
+												</Draggable>
+											)
+										})}
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</DragDropContext>
+				</ul>
+			</aside>
+		</div>
+	)
+}
