@@ -5,23 +5,20 @@ import { MdWidgets } from 'react-icons/md'
 import { TbBackground } from 'react-icons/tb'
 
 import useMediaQuery from '@/shared/lib/useMediaQuery'
-import { useGrid } from '@/shared/store'
-import { CustomizationButton, DWrapper } from '@/shared/ui'
+import { CustomizationButton } from '@/shared/ui'
 
 import { BackgroundMenu } from '@/entities/Backgrounds'
-import { usePosTask, useToggleTasks } from '@/entities/Task'
-import { usePosTimer, useToggleTimer } from '@/entities/Timer'
+import { useToggleTasks } from '@/entities/Task'
+import { useToggleTimer } from '@/entities/Timer'
+import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
 import { TimerWidget } from '@/widgets/timer'
 
 export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false)
 	const isDesktop = useMediaQuery('(min-width: 768px)')
-	const { isTasksToggled, isTasksShown } = useToggleTasks()
-	const { taskPosX, taskPosY, setTaskPos } = usePosTask()
-	const { isTimerToggled, isTimerShown } = useToggleTimer()
-	const { timerPosX, timerPosY, setTimerPos } = usePosTimer()
-	const { grid } = useGrid()
+	const { isTasksToggled, } = useToggleTasks()
+	const { isTimerToggled } = useToggleTimer()
 
 	return (
 		<div ref={ref} className='pb-8 md:h-screen md:pb-0'>
@@ -31,7 +28,7 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						title=''
 						icon={<IoMdSettings size={20} className='' />}
 						modal={<div></div>}
-						changeModal={() => {}}
+						changeModal={() => { }}
 					/>
 				</div>
 				<div className='configureWidgetsButton'>
@@ -39,7 +36,7 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						title=''
 						icon={<MdWidgets size={20} className='' />}
 						modal={<div></div>}
-						changeModal={() => {}}
+						changeModal={() => { }}
 					/>
 				</div>
 				<div className='chooseBackgroundButton'>
@@ -68,28 +65,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 				</div>
 			) : (
 				<>
-					<DWrapper
-						toggleHook={isTasksToggled && isTasksShown}
-						defaultX={taskPosX}
-						defaultY={taskPosY}
-						setPosition={setTaskPos}
-						isSticky={false}
-						gridValues={grid}
-						handle='.handle'
-					>
-						<TaskTrackerWidget />
-					</DWrapper>
-					<DWrapper
-						toggleHook={isTimerToggled && isTimerShown}
-						defaultX={timerPosX}
-						defaultY={timerPosY}
-						setPosition={setTimerPos}
-						isSticky={false}
-						gridValues={grid}
-						handle='.handle'
-					>
-						<TimerWidget />
-					</DWrapper>
+					<StickyNotesList />
+					<TaskTrackerWidget />
+					<TimerWidget />
 				</>
 			)}
 		</div>

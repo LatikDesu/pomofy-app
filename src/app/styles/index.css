@@ -59,3 +59,27 @@
 		width: 24rem;
 	}
 }
+
+/* Sticky Note Scrollbar */
+.sticky-note-scrollbar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.sticky-note-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.sticky-note-scrollbar::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+}
+
+.sticky-note-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+/* Firefox */
+.sticky-note-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}

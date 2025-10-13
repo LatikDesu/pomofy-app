@@ -9,11 +9,12 @@ import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
+import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
 import { useToggleWidgetReset } from '@/features/ResetPosition'
 import useSetDefault from '@/shared/lib/useSetDefault'
-import { ListTodo, RotateCcw, Timer } from 'lucide-react'
+import { ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
 import { DraggableNavItem } from './DraggableNavItem'
 import { SideBarItem } from './SideBarItem'
 
@@ -26,21 +27,14 @@ export const SideBar = () => {
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
 	const setDefault = useSetDefault()
 	const { isWidgetResetShown } = useToggleWidgetReset()
+	const { isStickyNoteShown } = useToggleStickyNote()
+	const { stickyNotes, addStickyNote } = useStickyNote()
+
 	let theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
 
 	const sideNavItems = [
-		// {
-		//   id: "1",
-		//   content: <IoMusicalNotesOutline className="h-6 w-6" />,
-		//   tooltipTitle: "Lofi Music",
-		//   isToggled: isMusicToggled,
-		//   setToggled: setIsMusicToggled,
-		//   toggleString: "Music Toggled",
-		//   toggleIcon: "🎵",
-		//   isShown: isMusicShown,
-		// },
 		{
-			id: '3',
+			id: '1',
 			content: <ListTodo className='h-6 w-6' />,
 			tooltipTitle: 'Трекер задач',
 			isToggled: isTasksToggled,
@@ -50,7 +44,7 @@ export const SideBar = () => {
 			isShown: isTasksShown
 		},
 		{
-			id: '4',
+			id: '2',
 			content: <Timer className='h-6 w-6' />,
 			tooltipTitle: 'Таймер',
 			isToggled: isTimerToggled,
@@ -59,18 +53,18 @@ export const SideBar = () => {
 			toggleIcon: '🍅',
 			isShown: isTimerShown
 		},
-		// {
-		//   id: "5",
-		//   content: <MdOutlineNoteAdd className="h-6 w-6" />,
-		//   tooltipTitle: "Sticky Note",
-		//   isToggled: stickyNotes.length > 0,
-		//   setToggled: addNewStickyNote,
-		//   toggleString: "Sticky Note Toggled",
-		//   toggleIcon: "📝",
-		//   isShown: isStickyNoteShown,
-		// },
 		{
-			id: "6",
+			id: "3",
+			content: <StickyNote className="h-6 w-6" />,
+			tooltipTitle: "Заметки",
+			isToggled: stickyNotes.length > 0,
+			setToggled: addNewStickyNote,
+			toggleString: "Заметки",
+			toggleIcon: "📝",
+			isShown: isStickyNoteShown,
+		},
+		{
+			id: "4",
 			content: <RotateCcw className="h-6 w-6" />,
 			tooltipTitle: "Сбросить позиции",
 			isToggled: false,
@@ -80,7 +74,7 @@ export const SideBar = () => {
 			isShown: isWidgetResetShown,
 		},
 		{
-			id: '7',
+			id: '5',
 			content: theme,
 			tooltipTitle: 'Тема',
 			isToggled: isDark,
@@ -88,6 +82,19 @@ export const SideBar = () => {
 			toggleString: 'Темная тема',
 			toggleIcon: '🌙',
 			isShown: isDarkModeShown
+		},
+		{
+			id: '6',
+			content: <BsArrowsFullscreen className='h-6 w-6' />,
+			tooltipTitle: 'Полноэкранный режим',
+			isToggled: isFullscreen,
+			setToggled: () => {
+				toggleFullScreen()
+				toggleFullscreenMode()
+			},
+			toggleString: 'Полноэкранный режим',
+			toggleIcon: '',
+			isShown: isFullscreenShown
 		},
 		// {
 		//   id: "8",
@@ -109,19 +116,6 @@ export const SideBar = () => {
 		//   toggleIcon: "📺",
 		//   isShown: isTwitchShown,
 		// },
-		{
-			id: '10',
-			content: <BsArrowsFullscreen className='h-6 w-6' />,
-			tooltipTitle: 'Полноэкранный режим',
-			isToggled: isFullscreen,
-			setToggled: () => {
-				toggleFullScreen()
-				toggleFullscreenMode()
-			},
-			toggleString: 'Полноэкранный режим',
-			toggleIcon: '',
-			isShown: isFullscreenShown
-		}
 		// {
 		//   id: "11",
 		//   content: <MdOutlineViewKanban className="h-6 w-6" />,
@@ -146,6 +140,10 @@ export const SideBar = () => {
 
 	function toggleDefaultPositions() {
 		setDefault()
+	}
+
+	function addNewStickyNote() {
+		addStickyNote("")
 	}
 
 	function toggleNavBar() {

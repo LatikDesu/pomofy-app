@@ -117,13 +117,13 @@ export const DWrapper = ({
 			setSavedPosition({ x, y })
 			lastTransformRef.current = null
 
-			if (isSticky) {
-				// setStickyNotesPos(stickyID, x, y)
+			if (isSticky && stickyID !== undefined) {
+				setPosition(stickyID, { x, y })
 			} else {
 				setPosition(x, y)
 			}
 		}
-	}, [isDragging, savedPosition, gridValues, isSticky, setPosition])
+	}, [isDragging, savedPosition, gridValues, isSticky, stickyID, setPosition])
 
 	// Calculate current position with transform
 	const currentX = savedPosition.x + (transform?.x || 0)
