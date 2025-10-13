@@ -8,7 +8,7 @@ export const useTimerTitleEffect = (
 ) => {
 	useEffect(() => {
 		if (hasStarted) {
-			const icon = sessionType === 'Session' ? '⏱' : '🍅'
+			const icon = sessionType === 'Сессия' ? '🍅' : '☕️'
 			document.title = `Pomofy -  ${icon} ${minutes}:${seconds}`
 		} else {
 			document.title = 'Pomofy'

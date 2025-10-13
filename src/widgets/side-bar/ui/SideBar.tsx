@@ -1,20 +1,21 @@
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
 import { useState } from 'react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
-import { CgNotes } from 'react-icons/cg'
 import { IoMenu } from 'react-icons/io5'
-import { MdDarkMode, MdOutlineTimer, MdWbSunny } from 'react-icons/md'
+import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
-import { DraggableNavItem } from './DraggableNavItem'
-import { SideBarItem } from './SideBarItem'
-// import { defaultToast } from "@/shared/lib/toast"
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
+import { useToggleWidgetReset } from '@/features/ResetPosition'
+import useSetDefault from '@/shared/lib/useSetDefault'
+import { ListTodo, RotateCcw, Timer } from 'lucide-react'
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -23,6 +24,8 @@ export const SideBar = () => {
 	const { isDark, toggleDarkMode, isDarkModeShown } = useDarkToggleStore()
 	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
+	const setDefault = useSetDefault()
+	const { isWidgetResetShown } = useToggleWidgetReset()
 	let theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
 
 	const sideNavItems = [
@@ -36,34 +39,24 @@ export const SideBar = () => {
 		//   toggleIcon: "🎵",
 		//   isShown: isMusicShown,
 		// },
-		// {
-		//   id: "2",
-		//   content: <FaSpotify className="h-6 w-6" />,
-		//   tooltipTitle: "Spotify",
-		//   isToggled: isSpotifyToggled,
-		//   setToggled: setIsSpotifyToggled,
-		//   toggleString: "Spotify Toggled",
-		//   toggleIcon: "🎧",
-		//   isShown: isSpotifyShown,
-		// },
 		{
 			id: '3',
-			content: <CgNotes className='h-6 w-6' />,
+			content: <ListTodo className='h-6 w-6' />,
 			tooltipTitle: 'Трекер задач',
 			isToggled: isTasksToggled,
 			setToggled: setIsTasksToggled,
 			toggleString: 'Трекер задач',
-			toggleIcon: '📓',
+			toggleIcon: '📝',
 			isShown: isTasksShown
 		},
 		{
 			id: '4',
-			content: <MdOutlineTimer className='h-6 w-6' />,
+			content: <Timer className='h-6 w-6' />,
 			tooltipTitle: 'Таймер',
 			isToggled: isTimerToggled,
 			setToggled: setIsTimerToggled,
 			toggleString: 'Таймер',
-			toggleIcon: '⏳',
+			toggleIcon: '🍅',
 			isShown: isTimerShown
 		},
 		// {
@@ -76,16 +69,16 @@ export const SideBar = () => {
 		//   toggleIcon: "📝",
 		//   isShown: isStickyNoteShown,
 		// },
-		// {
-		//   id: "6",
-		//   content: <VscDebugRestartFrame className="h-6 w-6" />,
-		//   tooltipTitle: "Reset Positions",
-		//   isToggled: false,
-		//   setToggled: toggleDefaultPositions,
-		//   toggleString: "Reset Toggled",
-		//   toggleIcon: "⏪",
-		//   isShown: isWidgetResetShown,
-		// },
+		{
+			id: "6",
+			content: <RotateCcw className="h-6 w-6" />,
+			tooltipTitle: "Сбросить позиции",
+			isToggled: false,
+			setToggled: toggleDefaultPositions,
+			toggleString: "Положение виджетов сброшено",
+			toggleIcon: "🔄",
+			isShown: isWidgetResetShown,
+		},
 		{
 			id: '7',
 			content: theme,
@@ -119,13 +112,13 @@ export const SideBar = () => {
 		{
 			id: '10',
 			content: <BsArrowsFullscreen className='h-6 w-6' />,
-			tooltipTitle: 'Fullscreen',
+			tooltipTitle: 'Полноэкранный режим',
 			isToggled: isFullscreen,
 			setToggled: () => {
 				toggleFullScreen()
 				toggleFullscreenMode()
 			},
-			toggleString: 'Fullscreen Toggled',
+			toggleString: 'Полноэкранный режим',
 			toggleIcon: '',
 			isShown: isFullscreenShown
 		}
@@ -151,10 +144,9 @@ export const SideBar = () => {
 		// },
 	]
 
-	// function toggleDefaultPositions() {
-	// 	setDefault()
-	// 	defaultToast("Positions reset")
-	// }
+	function toggleDefaultPositions() {
+		setDefault()
+	}
 
 	function toggleNavBar() {
 		setActive(oldDate => !oldDate)

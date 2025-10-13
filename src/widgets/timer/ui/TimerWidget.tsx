@@ -44,14 +44,14 @@ export const TimerWidget = () => {
 			if (sessionType === 'Сессия') {
 				setBreakStarted(true)
 				setTimerQueue(currentBreakLength)
-				toast.custom(t => <ModeToast t={t} message='Перерыв' icon='😇' />, {
+				toast.custom(t => <ModeToast t={t} message='Перерыв' icon='☕️' />, {
 					duration: currentBreakLength * 1000
 				})
 			} else {
 				setBreakStarted(false)
 				setTimerQueue(pomodoroLength)
 				toast.dismiss()
-				toast.custom(t => <ModeToast t={t} message='Рабочий режим' icon='📚' />, {
+				toast.custom(t => <ModeToast t={t} message='Рабочий режим' icon='🍅' />, {
 					duration: pomodoroLength * 1000
 				})
 			}
