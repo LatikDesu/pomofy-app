@@ -4,8 +4,7 @@ import { toast } from 'react-hot-toast'
 import { ResetTimer, SelectBreakType, SettingsPopover, ToggleCountdown } from '@/features/Timer'
 
 import { ModeToast } from '@/shared/lib/toast'
-import { useGrid } from '@/shared/store'
-import { CloseWidgetButton, DWrapper, WidgetWrapper } from '@/shared/ui'
+import { CloseWidgetButton, WidgetWrapper } from '@/shared/ui'
 
 import {
 	TimerDisplay,
@@ -14,7 +13,6 @@ import {
 	useBreakStarted,
 	useLongBreakTimer,
 	usePomodoroTimer,
-	usePosTimer,
 	useShortBreakTimer,
 	useTimer,
 	useTimerStarted,
@@ -36,9 +34,6 @@ export const TimerWidget = () => {
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const sessionType = breakStarted ? 'Перерыв' : 'Сессия'
 	const { alarm } = useAlarm()
-	const { isTimerToggled, isTimerShown } = useToggleTimer()
-	const { timerPosX, timerPosY, setTimerPos } = usePosTimer()
-	const { grid } = useGrid()
 
 	useEffect(() => {
 		if (timerQueue === 0) {
@@ -116,33 +111,23 @@ export const TimerWidget = () => {
 	)
 
 	return (
-		<DWrapper
-			toggleHook={isTimerToggled && isTimerShown}
-			defaultX={timerPosX}
-			defaultY={timerPosY}
-			setPosition={setTimerPos}
-			isSticky={false}
-			gridValues={grid}
-			handle='.handle'
-		>
-			<WidgetWrapper actions={actions}>
-				<SelectBreakType
-					onSelect={setCurrentBreakLength}
-					shortBreakLength={shortBreakLength}
-					longBreakLength={longBreakLength}
-					currentBreakLength={currentBreakLength}
-					sessionType={sessionType}
-				/>
-				<div className='flex flex-col items-center justify-center pt-2'>
-					{/* <p id="tabular-nums">{sessionType}</p> */}
-					<TimerDisplay />
-				</div>
-				<div className='timer-control flex items-center justify-center gap-2 pb-2 tabular-nums'>
-					<ToggleCountdown />
-					<ResetTimer audioRef={audioRef} />
-				</div>
-				<audio id='beep' preload='auto' ref={audioRef} src={alarm} />
-			</WidgetWrapper>
-		</DWrapper>
+		<WidgetWrapper actions={actions}>
+			<SelectBreakType
+				onSelect={setCurrentBreakLength}
+				shortBreakLength={shortBreakLength}
+				longBreakLength={longBreakLength}
+				currentBreakLength={currentBreakLength}
+				sessionType={sessionType}
+			/>
+			<div className='flex flex-col items-center justify-center pt-2'>
+				{/* <p id="tabular-nums">{sessionType}</p> */}
+				<TimerDisplay />
+			</div>
+			<div className='timer-control flex items-center justify-center gap-2 pb-2 tabular-nums'>
+				<ToggleCountdown />
+				<ResetTimer audioRef={audioRef} />
+			</div>
+			<audio id='beep' preload='auto' ref={audioRef} src={alarm} />
+		</WidgetWrapper>
 	)
 }

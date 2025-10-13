@@ -119,10 +119,10 @@ export const InfoSection = ({
 					<footer className='lg:text-lef bottom-0 bg-gray-900/[0.7] text-center text-sm'>
 						<ul className='pt-2 text-center text-purple-500/[0.75]'>
 							<li>
-								<a className='text-blue-500/[0.75]' href={LINKS.LICENSE}>
+								<a className='text-blue-500/[0.75]' href={LINKS.LICENSE} target='_blank'>
 									MIT License
 								</a>
-								<a className='text-blue-500/[0.75]' href={LINKS.GITHUB}>
+								<a className='text-blue-500/[0.75]' href={LINKS.GITHUB} target='_blank'>
 									{' - '}GitHub
 								</a>
 							</li>
