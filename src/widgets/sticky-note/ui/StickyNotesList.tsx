@@ -1,8 +1,8 @@
-import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useGrid } from '@/shared/store'
 import { DWrapper } from '@/shared/ui'
 
 import { StickyNoteWidget } from './StickyNoteWidget'
+import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 
 export function StickyNotesList() {
 	const { stickyNotes, setStickyNotePosition } = useStickyNote()
@@ -23,10 +23,14 @@ export function StickyNotesList() {
 					gridValues={grid}
 					handle='.handle'
 				>
-					<StickyNoteWidget id={note.id} text={note.text} color={note.color} />
+					<StickyNoteWidget
+						id={note.id}
+						text={note.text}
+						color={note.color}
+						isLocked={note.isLocked}
+					/>
 				</DWrapper>
 			))}
 		</>
 	)
 }
-

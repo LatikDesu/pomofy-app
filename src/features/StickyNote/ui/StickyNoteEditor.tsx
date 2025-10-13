@@ -2,16 +2,23 @@ import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
-import { useStickyNote } from '@/entities/StickyNote'
 import { hasHtmlTags, htmlToMarkdown } from '@/features/StickyNote/lib'
+
+import { useStickyNote } from '@/entities/StickyNote'
 
 interface StickyNoteEditorProps {
 	noteId: number
 	text: string
 	containerHeight: number
+	isLocked: boolean
 }
 
-export function StickyNoteEditor({ noteId, text, containerHeight }: StickyNoteEditorProps) {
+export function StickyNoteEditor({
+	noteId,
+	text,
+	containerHeight,
+	isLocked
+}: StickyNoteEditorProps) {
 	const { updateNote } = useStickyNote()
 	const [isEditing, setIsEditing] = useState(false)
 
@@ -38,7 +45,9 @@ export function StickyNoteEditor({ noteId, text, containerHeight }: StickyNoteEd
 	}
 
 	function handleFocus() {
-		setIsEditing(true)
+		if (!isLocked) {
+			setIsEditing(true)
+		}
 	}
 
 	function handleBlur() {
@@ -54,7 +63,7 @@ export function StickyNoteEditor({ noteId, text, containerHeight }: StickyNoteEd
 		<div className='cancelDrag px-[7px] pb-5' style={{ height: editorHeight }}>
 			{!isEditing && text ? (
 				<div
-					className='h-full w-full sticky-note-scrollbar overflow-y-auto text-sm markdown-content cursor-text'
+					className='sticky-note-scrollbar markdown-content h-full w-full cursor-text overflow-y-auto text-sm'
 					onClick={handleFocus}
 				>
 					<ReactMarkdown remarkPlugins={[remarkGfm]}>{displayText}</ReactMarkdown>
@@ -68,7 +77,7 @@ export function StickyNoteEditor({ noteId, text, containerHeight }: StickyNoteEd
 					onFocus={handleFocus}
 					onBlur={handleBlur}
 					autoFocus={isEditing}
-					className='h-full w-full sticky-note-scrollbar resize-none text-sm'
+					className='sticky-note-scrollbar h-full w-full resize-none text-sm'
 					style={{
 						border: 'none',
 						backgroundColor: 'transparent',
@@ -79,4 +88,3 @@ export function StickyNoteEditor({ noteId, text, containerHeight }: StickyNoteEd
 		</div>
 	)
 }
-

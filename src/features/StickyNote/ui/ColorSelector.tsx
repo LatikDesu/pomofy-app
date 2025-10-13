@@ -1,7 +1,8 @@
 import { Settings2 } from 'lucide-react'
 
-import { COLOR_OPTIONS, type ColorOption, useStickyNote } from '@/entities/StickyNote'
 import { PopoverBody, PopoverContent, PopoverRoot, PopoverTrigger } from '@/shared/ui'
+
+import { COLOR_OPTIONS, type ColorOption, useStickyNote } from '@/entities/StickyNote'
 
 interface ColorSelectorProps {
 	noteId: number
@@ -16,10 +17,10 @@ export function ColorSelector({ noteId }: ColorSelectorProps) {
 
 	return (
 		<PopoverRoot>
-			<PopoverTrigger className='!border-none hover:!bg-transparent !p-0 '>
+			<PopoverTrigger className='!border-none !p-0 hover:!bg-transparent'>
 				<Settings2 className='cursor-pointer !text-[var(--text-secondary)]' size={16} />
 			</PopoverTrigger>
-			<PopoverContent className='w-auto -right-4.5'>
+			<PopoverContent className='-right-4.5 w-auto'>
 				<PopoverBody className='!p-2'>
 					<div className='flex gap-1'>
 						{Object.values(COLOR_OPTIONS).map(color => (
@@ -36,4 +37,3 @@ export function ColorSelector({ noteId }: ColorSelectorProps) {
 		</PopoverRoot>
 	)
 }
-

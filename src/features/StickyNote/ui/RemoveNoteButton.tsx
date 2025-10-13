@@ -21,4 +21,3 @@ export function RemoveNoteButton({ noteId }: RemoveNoteButtonProps) {
 		/>
 	)
 }
-

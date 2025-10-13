@@ -32,7 +32,7 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						title=''
 						icon={<IoMdSettings size={20} className='' />}
 						modal={<div></div>}
-						changeModal={() => { }}
+						changeModal={() => {}}
 					/>
 				</div>
 				<div className='configureWidgetsButton'>
@@ -40,7 +40,7 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						title=''
 						icon={<MdWidgets size={20} className='' />}
 						modal={<div></div>}
-						changeModal={() => { }}
+						changeModal={() => {}}
 					/>
 				</div>
 				<div className='chooseBackgroundButton'>

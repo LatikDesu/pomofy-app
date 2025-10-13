@@ -14,6 +14,7 @@ export interface IStickyNote {
 	color: ColorOption
 	stickyNotesPosX: number
 	stickyNotesPosY: number
+	isLocked: boolean
 }
 
 export interface IStickyNotePosition {
@@ -24,6 +25,7 @@ export interface IStickyNotePosition {
 export interface IStickyNoteUpdate {
 	text?: string
 	color?: ColorOption
+	isLocked?: boolean
 }
 
 export interface IStickyNoteState {

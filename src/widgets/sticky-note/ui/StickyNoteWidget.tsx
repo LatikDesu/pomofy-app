@@ -1,17 +1,25 @@
 import { GripIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import type { ColorOption } from '@/entities/StickyNote'
-import { ColorSelector, RemoveNoteButton, StickyNoteEditor } from '@/features/StickyNote'
+import {
+	ColorSelector,
+	LockNoteButton,
+	RemoveNoteButton,
+	StickyNoteEditor
+} from '@/features/StickyNote'
+
 import { useDragHandle } from '@/shared/ui'
+
+import type { ColorOption } from '@/entities/StickyNote'
 
 interface StickyNoteWidgetProps {
 	id: number
 	text: string
 	color: ColorOption
+	isLocked: boolean
 }
 
-export function StickyNoteWidget({ id, text, color }: StickyNoteWidgetProps) {
+export function StickyNoteWidget({ id, text, color, isLocked }: StickyNoteWidgetProps) {
 	const dragHandleProps = useDragHandle()
 	const [size, setSize] = useState({ width: 228, height: 215 })
 
@@ -41,19 +49,20 @@ export function StickyNoteWidget({ id, text, color }: StickyNoteWidgetProps) {
 
 	return (
 		<div
-			className='relative rounded-md bg-[#feff9c] shadow-md text-[var(--text-secondary)]'
+			className='relative rounded-md bg-[#feff9c] text-[var(--text-secondary)] shadow-md'
 			style={{ backgroundColor: color, width: size.width, height: size.height }}
 		>
 			<div className='relative flex w-full items-center justify-end px-3 pt-2 pb-1'>
 				<div className='absolute inset-0 cursor-move' {...dragHandleProps} />
 				<div className='relative z-10 flex items-center gap-2'>
 					<ColorSelector noteId={id} />
+					<LockNoteButton noteId={id} isLocked={isLocked} />
 					<RemoveNoteButton noteId={id} />
 				</div>
 			</div>
-			<StickyNoteEditor noteId={id} text={text} containerHeight={size.height} />
+			<StickyNoteEditor noteId={id} text={text} containerHeight={size.height} isLocked={isLocked} />
 			<div
-				className='absolute bottom-1 right-1 z-20 cursor-nwse-resize'
+				className='absolute right-1 bottom-1 z-20 cursor-nwse-resize'
 				onMouseDown={handleMouseDown}
 			>
 				<GripIcon size={16} className='rotate-90 text-gray-500' />
@@ -61,4 +70,3 @@ export function StickyNoteWidget({ id, text, color }: StickyNoteWidgetProps) {
 		</div>
 	)
 }
-

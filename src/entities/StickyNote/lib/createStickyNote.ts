@@ -15,6 +15,7 @@ export function createStickyNote(text: string, existingNotesCount: number): ISti
 		text,
 		color: COLOR_OPTIONS.Yellow,
 		stickyNotesPosX: DEFAULT_STICKY_NOTE_POS_X,
-		stickyNotesPosY: DEFAULT_STICKY_NOTE_POS_Y
+		stickyNotesPosY: DEFAULT_STICKY_NOTE_POS_Y,
+		isLocked: false
 	}
 }

@@ -2,8 +2,8 @@ import { InfoPopover } from '@/features/Task'
 
 import { CloseWidgetButton, WidgetWrapper } from '@/shared/ui'
 
-import { useToggleTasks } from '@/entities/Task'
 import { TaskList } from './TaskList'
+import { useToggleTasks } from '@/entities/Task'
 
 export const TaskTrackerWidget = () => {
 	const { setIsTasksToggled } = useToggleTasks()
@@ -16,7 +16,6 @@ export const TaskTrackerWidget = () => {
 	)
 
 	return (
-
 		<WidgetWrapper actions={actions}>
 			<TaskList />
 		</WidgetWrapper>

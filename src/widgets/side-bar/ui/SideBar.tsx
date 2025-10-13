@@ -1,22 +1,23 @@
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
+import { ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
 import { useState } from 'react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { IoMenu } from 'react-icons/io5'
 import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
+import { useToggleWidgetReset } from '@/features/ResetPosition'
+
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
+import useSetDefault from '@/shared/lib/useSetDefault'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
-import { useToggleWidgetReset } from '@/features/ResetPosition'
-import useSetDefault from '@/shared/lib/useSetDefault'
-import { ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
-import { DraggableNavItem } from './DraggableNavItem'
-import { SideBarItem } from './SideBarItem'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -54,24 +55,24 @@ export const SideBar = () => {
 			isShown: isTimerShown
 		},
 		{
-			id: "3",
-			content: <StickyNote className="h-6 w-6" />,
-			tooltipTitle: "Заметки",
+			id: '3',
+			content: <StickyNote className='h-6 w-6' />,
+			tooltipTitle: 'Заметки',
 			isToggled: stickyNotes.length > 0,
 			setToggled: addNewStickyNote,
-			toggleString: "Заметки",
-			toggleIcon: "📝",
-			isShown: isStickyNoteShown,
+			toggleString: 'Заметки',
+			toggleIcon: '📝',
+			isShown: isStickyNoteShown
 		},
 		{
-			id: "4",
-			content: <RotateCcw className="h-6 w-6" />,
-			tooltipTitle: "Сбросить позиции",
+			id: '4',
+			content: <RotateCcw className='h-6 w-6' />,
+			tooltipTitle: 'Сбросить позиции',
 			isToggled: false,
 			setToggled: toggleDefaultPositions,
-			toggleString: "Положение виджетов сброшено",
-			toggleIcon: "🔄",
-			isShown: isWidgetResetShown,
+			toggleString: 'Положение виджетов сброшено',
+			toggleIcon: '🔄',
+			isShown: isWidgetResetShown
 		},
 		{
 			id: '5',
@@ -95,7 +96,7 @@ export const SideBar = () => {
 			toggleString: 'Полноэкранный режим',
 			toggleIcon: '',
 			isShown: isFullscreenShown
-		},
+		}
 		// {
 		//   id: "8",
 		//   content: <BsFillChatLeftQuoteFill className="h-6 w-6" />,
@@ -143,7 +144,7 @@ export const SideBar = () => {
 	}
 
 	function addNewStickyNote() {
-		addStickyNote("")
+		addStickyNote('')
 	}
 
 	function toggleNavBar() {
