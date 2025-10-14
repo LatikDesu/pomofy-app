@@ -57,13 +57,13 @@ export const BackgroundMenu = ({
 						isPicked={backgroundId == Background.JAPAN}
 						setBackgroundId={setBackgroundId}
 						background={Background.JAPAN}
-						title='Япония'
+						title='Лето'
 					/>
 					<BackgroundDropdownItem
 						isPicked={backgroundId == Background.COTTAGE}
 						setBackgroundId={setBackgroundId}
 						background={Background.COTTAGE}
-						title='Коттедж'
+						title='Сказка'
 					/>
 					<BackgroundDropdownItem
 						isPicked={backgroundId == Background.TRAIN}
@@ -72,22 +72,28 @@ export const BackgroundMenu = ({
 						title='Поезд'
 					/>
 					<BackgroundDropdownItem
+						isPicked={backgroundId == Background.CAMPFIRE}
+						setBackgroundId={setBackgroundId}
+						background={Background.CAMPFIRE}
+						title='Костер'
+					/>
+					{/* <BackgroundDropdownItem
 						isPicked={backgroundId == Background.DVD}
 						setBackgroundId={setBackgroundId}
 						background={Background.DVD}
 						title='DVD плеер'
-					/>
+					/> */}
+					{/* <BackgroundDropdownItem
+						isPicked={backgroundId == Background.NYAN_CAT}
+						setBackgroundId={setBackgroundId}
+						background={Background.NYAN_CAT}
+						title='Nyan Cat'
+					/> */}
 					<BackgroundDropdownItem
 						isPicked={backgroundId == Background.LOFIGIRL}
 						setBackgroundId={setBackgroundId}
 						background={Background.LOFIGIRL}
 						title='Lofi Girl'
-					/>
-					<BackgroundDropdownItem
-						isPicked={backgroundId == Background.NYAN_CAT}
-						setBackgroundId={setBackgroundId}
-						background={Background.NYAN_CAT}
-						title='Nyan Cat'
 					/>
 					<BackgroundDropdownItem
 						isPicked={backgroundId == Background.CUSTOM_COLOR}

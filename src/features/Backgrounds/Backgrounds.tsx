@@ -1,3 +1,5 @@
+import { Background, useSetBackground } from '@/entities/Backgrounds'
+import { Campfire } from './Campfire/Campfire'
 import { Cottage } from './Cottage/Cottage'
 import { CustomColor } from './CustomColor/CustomColor'
 import { DvdPlayer } from './Dvd/DvdPlayer'
@@ -8,7 +10,6 @@ import { LofiGirl } from './LofiGirl/LofiGirl'
 import NyanCat from './NyanCat/NyanCat'
 import { Snow } from './Snow/Snow'
 import { Train } from './Train/Train'
-import { Background, useSetBackground } from '@/entities/Backgrounds'
 
 const BackgroundComponents = {
 	[Background.SNOW]: Snow,
@@ -18,9 +19,11 @@ const BackgroundComponents = {
 	[Background.COTTAGE]: Cottage,
 	[Background.LOFIGIRL]: LofiGirl,
 	[Background.TRAIN]: Train,
+	[Background.CAMPFIRE]: Campfire,
 	[Background.DVD]: DvdPlayer,
+	[Background.NYAN_CAT]: NyanCat,
 	[Background.CUSTOM_COLOR]: CustomColor,
-	[Background.NYAN_CAT]: NyanCat
+
 }
 
 export const Backgrounds = () => {

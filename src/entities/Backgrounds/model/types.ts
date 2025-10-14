@@ -7,6 +7,7 @@ export const Background = {
 	LOFIGIRL: 5,
 	TRAIN: 6,
 	DVD: 7,
+	CAMPFIRE: 8,
 	CUSTOM_COLOR: 9,
 	NYAN_CAT: 10
 } as const
