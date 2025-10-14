@@ -14,7 +14,7 @@ interface IToggleWidgetReset {
 export const useToggleWidgetReset = create<IToggleWidgetReset>()(
 	persist(
 		(set, _) => ({
-			isWidgetResetShown: true,
+			isWidgetResetShown: false,
 			setIsWidgetResetShown: isWidgetResetShown => set({ isWidgetResetShown })
 		}),
 		{

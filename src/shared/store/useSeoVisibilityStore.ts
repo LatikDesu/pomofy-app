@@ -10,13 +10,15 @@ import { persist } from 'zustand/middleware'
 export interface ISeoContent {
 	isSeoVisible: boolean
 	toggleSeoVisibility: () => void
+	setSeoVisibility: (visible: boolean) => void
 }
 
 export const useSeoVisibilityStore = create<ISeoContent>()(
 	persist(
 		(set, get) => ({
 			isSeoVisible: true,
-			toggleSeoVisibility: () => set({ isSeoVisible: !get().isSeoVisible })
+			toggleSeoVisibility: () => set({ isSeoVisible: !get().isSeoVisible }),
+			setSeoVisibility: (visible: boolean) => set({ isSeoVisible: visible })
 		}),
 		{ name: 'state_seo_visibility' }
 	)

@@ -19,7 +19,7 @@ export const useFullScreenToggleStore = create<IFullscreenState>()(
 		set => ({
 			isFullscreen: false,
 			toggleFullscreenMode: () => set(oldState => ({ isFullscreen: !oldState.isFullscreen })),
-			isFullscreenShown: true,
+			isFullscreenShown: false,
 			setIsFullscreenShown: isFullscreenShown => set({ isFullscreenShown })
 		}),
 		{ name: 'state_fullscreen' }

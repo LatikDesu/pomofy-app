@@ -5,7 +5,7 @@ import { BsArrowsFullscreen } from 'react-icons/bs'
 import { IoMenu } from 'react-icons/io5'
 import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
-import { useToggleWidgetReset } from '@/features/ResetPosition'
+import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import useSetDefault from '@/shared/lib/useSetDefault'

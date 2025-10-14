@@ -19,7 +19,7 @@ export const useDarkToggleStore = create<IDarkModeState>()(
 		set => ({
 			isDark: true,
 			toggleDarkMode: () => set(oldState => ({ isDark: !oldState.isDark })),
-			isDarkModeShown: true,
+			isDarkModeShown: false,
 			setIsDarkModeShown: isDarkModeShown => set({ isDarkModeShown })
 		}),
 		{ name: 'state_darkmode' }

@@ -31,7 +31,7 @@ export const SelectBreakType = ({
 			<Button
 				variant='default'
 				className={clsx(
-					'text-xs',
+					'hidden text-xs sm:block',
 					currentBreakLength === shortBreakLength &&
 						'bg-[var(--color-secondary-active)] dark:bg-[var(--color-default-active)]'
 				)}
@@ -43,7 +43,7 @@ export const SelectBreakType = ({
 			<Button
 				variant='default'
 				className={clsx(
-					'text-xs',
+					'hidden text-xs sm:block',
 					currentBreakLength === longBreakLength &&
 						'bg-[var(--color-secondary-active)] dark:bg-[var(--color-default-active)]'
 				)}

@@ -7,17 +7,17 @@ import { persist } from 'zustand/middleware'
  * Handler for Grid Value
  */
 export interface IGrid {
-	grid: number[]
-	setGrid: (grid: number[]) => void
+	grid: number[] | null
+	setGrid: (grid: number[] | null) => void
 	setGridDefault: () => void
 }
 
 export const useGrid = create<IGrid>()(
 	persist(
 		(set, _) => ({
-			grid: [],
+			grid: null,
 			setGrid: gridVal => set({ grid: gridVal }),
-			setGridDefault: () => set(() => ({ grid: [] }))
+			setGridDefault: () => set(() => ({ grid: null }))
 		}),
 		{ name: 'set_grid' }
 	)

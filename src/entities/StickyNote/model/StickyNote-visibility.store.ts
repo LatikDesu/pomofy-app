@@ -12,7 +12,7 @@ import type { IToggleStickyNote } from './types'
 export const useToggleStickyNote = create<IToggleStickyNote>()(
 	persist(
 		set => ({
-			isStickyNoteShown: true,
+			isStickyNoteShown: false,
 			toggleStickyNote: () => set(state => ({ isStickyNoteShown: !state.isStickyNoteShown })),
 			setIsStickyNoteShown: isShown => set({ isStickyNoteShown: isShown })
 		}),

@@ -20,7 +20,7 @@ export function ColorSelector({ noteId }: ColorSelectorProps) {
 			<PopoverTrigger className='!border-none !p-0 hover:!bg-transparent'>
 				<Settings2 className='cursor-pointer !text-[var(--text-secondary)]' size={16} />
 			</PopoverTrigger>
-			<PopoverContent className='-right-4.5 w-auto'>
+			<PopoverContent className='-right-10 w-auto'>
 				<PopoverBody className='!p-2'>
 					<div className='flex gap-1'>
 						{Object.values(COLOR_OPTIONS).map(color => (

@@ -39,13 +39,28 @@ export function Modal({ children }: { children: ReactNode }) {
 export const ModalTrigger = ({
 	children,
 	className,
-	onClick
+	onClick,
+	asChild = false
 }: {
 	children: ReactNode
 	className?: string
 	onClick?: () => void
+	asChild?: boolean
 }) => {
 	const { setOpen } = useModal()
+
+	if (asChild && React.isValidElement(children)) {
+		const childElement = children as React.ReactElement<any>
+		return React.cloneElement(childElement, {
+			onClick: (e: React.MouseEvent) => {
+				setOpen(true)
+				onClick?.()
+				childElement.props.onClick?.(e)
+			},
+			className: cn(childElement.props.className, className)
+		})
+	}
+
 	return (
 		<button
 			className={cn(
@@ -140,7 +155,16 @@ export const ModalContent = ({
 	children: ReactNode
 	className?: string
 }) => {
-	return <div className={cn('flex flex-col p-6', className)}>{children}</div>
+	return (
+		<div
+			className={cn(
+				'flex flex-col p-6 text-[var(--text-secondary)] dark:text-[var(--text-default)]',
+				className
+			)}
+		>
+			{children}
+		</div>
+	)
 }
 
 export const ModalFooter = ({

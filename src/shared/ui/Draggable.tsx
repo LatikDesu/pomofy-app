@@ -40,7 +40,7 @@ export const DWrapper = ({
 	setPosition: any
 	isSticky: boolean
 	stickyID?: number
-	gridValues?: number[]
+	gridValues?: number[] | null
 	handle?: string
 }) => {
 	const { areWidgetsLocked } = useLockWidgetsStore()
