@@ -7,6 +7,7 @@ import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
+import { YandexIcon } from '@/shared/icons'
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import useSetDefault from '@/shared/lib/useSetDefault'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
@@ -18,6 +19,7 @@ import { SideBarItem } from './SideBarItem'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
+import { useYandexMusic } from '@/entities/YandexMusic'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -26,6 +28,7 @@ export const SideBar = () => {
 	const { isDark, toggleDarkMode, isDarkModeShown } = useDarkToggleStore()
 	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
+	const { isYandexToggled, setIsYandexToggled, isYandexShown } = useYandexMusic()
 	const setDefault = useSetDefault()
 	const { isWidgetResetShown } = useToggleWidgetReset()
 	const { isStickyNoteShown } = useToggleStickyNote()
@@ -96,6 +99,16 @@ export const SideBar = () => {
 			toggleString: 'Полноэкранный режим',
 			toggleIcon: '',
 			isShown: isFullscreenShown
+		},
+		{
+			id: '7',
+			content: <YandexIcon className='h-6 w-6' />,
+			tooltipTitle: 'Яндекс.Музыка',
+			isToggled: isYandexToggled,
+			setToggled: setIsYandexToggled,
+			toggleString: 'Яндекс. Музыка',
+			toggleIcon: '🎵',
+			isShown: isYandexShown
 		}
 		// {
 		//   id: "8",

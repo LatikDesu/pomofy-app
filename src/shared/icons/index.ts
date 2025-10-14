@@ -1,0 +1,1 @@
+export { YandexIcon } from './yandex'

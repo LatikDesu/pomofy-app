@@ -4,15 +4,17 @@ import { MdOutlineNoteAdd, MdWbSunny, MdWidgets } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
+import { YandexIcon } from '@/shared/icons'
 import useMediaQuery from '@/shared/lib/useMediaQuery'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
-import { NeumorphButton } from '@/shared/ui/Button'
+import { NeumorphButton } from '@/shared/ui'
 import { Modal, ModalBody, ModalContent, ModalTrigger } from '@/shared/ui/Modal'
 
 import { WidgetButton } from './WidgetButton'
 import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
+import { useYandexMusic } from '@/entities/YandexMusic'
 
 export const WidgetControlModal = () => {
 	const { isTimerShown, setIsTimerShown } = useToggleTimer()
@@ -21,6 +23,7 @@ export const WidgetControlModal = () => {
 	const { isDarkModeShown, setIsDarkModeShown } = useDarkToggleStore()
 	const { isFullscreenShown, setIsFullscreenShown } = useFullScreenToggleStore()
 	const { isWidgetResetShown, setIsWidgetResetShown } = useToggleWidgetReset()
+	const { isYandexShown, setIsYandexShown } = useYandexMusic()
 
 	const isDesktop = useMediaQuery('(min-width: 641px)')
 	const isDark = useDarkToggleStore(state => state.isDark)
@@ -77,6 +80,12 @@ export const WidgetControlModal = () => {
 								icon={<BsArrowsFullscreen className='h-6 w-6' />}
 							/>
 						)}
+						<WidgetButton
+							isActive={isYandexShown}
+							onClick={() => setIsYandexShown(!isYandexShown)}
+							title='Я.Музыка'
+							icon={<YandexIcon className='h-6 w-6' />}
+						/>
 					</div>
 				</ModalContent>
 			</ModalBody>

@@ -11,9 +11,11 @@ import { DWrapper } from '@/shared/ui'
 import { BackgroundModal } from '@/entities/Backgrounds'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
 import { usePosTimer, useToggleTimer } from '@/entities/Timer'
+import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
 import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
 import { TimerWidget } from '@/widgets/timer'
+import { YandexWidget } from '@/widgets/yandex-music'
 
 export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -21,6 +23,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { taskPosX, taskPosY, setTaskPos } = usePosTask()
 	const { isTimerToggled, isTimerShown } = useToggleTimer()
 	const { timerPosX, timerPosY, setTimerPos } = usePosTimer()
+	const { isYandexToggled, isYandexShown } = useYandexMusic()
+	const { yandexPosX, yandexPosY, setYandexPos } = usePosYandex()
 	const { grid } = useGrid()
 
 	return (
@@ -38,6 +42,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 					</div>
 					<div className={clsx(isTasksToggled ? 'block' : 'hidden')}>
 						<TaskTrackerWidget />
+					</div>
+					<div className={clsx(isYandexToggled ? 'block' : 'hidden')}>
+						<YandexWidget />
 					</div>
 				</div>
 			) : (
@@ -64,6 +71,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<TimerWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isYandexToggled && isYandexShown}
+						defaultX={yandexPosX}
+						defaultY={yandexPosY}
+						setPosition={setYandexPos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<YandexWidget />
 					</DWrapper>
 				</>
 			)}
