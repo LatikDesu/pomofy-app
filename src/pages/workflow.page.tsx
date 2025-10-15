@@ -9,9 +9,11 @@ import { useGrid } from '@/shared/store'
 import { DWrapper } from '@/shared/ui'
 
 import { BackgroundModal } from '@/entities/Backgrounds'
+import { usePosSpotify, useSpotifyMusic } from '@/entities/Spotify'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
 import { usePosTimer, useToggleTimer } from '@/entities/Timer'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
+import { SpotifyWidget } from '@/widgets/spotify'
 import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
 import { TimerWidget } from '@/widgets/timer'
@@ -25,6 +27,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { timerPosX, timerPosY, setTimerPos } = usePosTimer()
 	const { isYandexToggled, isYandexShown } = useYandexMusic()
 	const { yandexPosX, yandexPosY, setYandexPos } = usePosYandex()
+	const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
+	const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify()
 	const { grid } = useGrid()
 
 	return (
@@ -45,6 +49,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 					</div>
 					<div className={clsx(isYandexToggled ? 'block' : 'hidden')}>
 						<YandexWidget />
+					</div>
+					<div className={clsx(isSpotifyToggled ? 'block' : 'hidden')}>
+						<SpotifyWidget />
 					</div>
 				</div>
 			) : (
@@ -82,6 +89,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<YandexWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isSpotifyToggled && isSpotifyShown}
+						defaultX={spotifyPosX}
+						defaultY={spotifyPosY}
+						setPosition={setSpotifyPos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<SpotifyWidget />
 					</DWrapper>
 				</>
 			)}

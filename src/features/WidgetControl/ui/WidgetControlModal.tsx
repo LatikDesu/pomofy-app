@@ -4,13 +4,14 @@ import { MdOutlineNoteAdd, MdWbSunny, MdWidgets } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
-import { YandexIcon } from '@/shared/icons'
+import { SpotifyIcon, YandexIcon } from '@/shared/icons'
 import useMediaQuery from '@/shared/lib/useMediaQuery'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 import { NeumorphButton } from '@/shared/ui'
 import { Modal, ModalBody, ModalContent, ModalTrigger } from '@/shared/ui/Modal'
 
 import { WidgetButton } from './WidgetButton'
+import { useSpotifyMusic } from '@/entities/Spotify'
 import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
@@ -24,7 +25,7 @@ export const WidgetControlModal = () => {
 	const { isFullscreenShown, setIsFullscreenShown } = useFullScreenToggleStore()
 	const { isWidgetResetShown, setIsWidgetResetShown } = useToggleWidgetReset()
 	const { isYandexShown, setIsYandexShown } = useYandexMusic()
-
+	const { isSpotifyShown, setIsSpotifyShown } = useSpotifyMusic()
 	const isDesktop = useMediaQuery('(min-width: 641px)')
 	const isDark = useDarkToggleStore(state => state.isDark)
 
@@ -85,6 +86,12 @@ export const WidgetControlModal = () => {
 							onClick={() => setIsYandexShown(!isYandexShown)}
 							title='Я.Музыка'
 							icon={<YandexIcon className='h-6 w-6' />}
+						/>
+						<WidgetButton
+							isActive={isSpotifyShown}
+							onClick={() => setIsSpotifyShown(!isSpotifyShown)}
+							title='Spotify'
+							icon={<SpotifyIcon className='h-6 w-6' />}
 						/>
 					</div>
 				</ModalContent>

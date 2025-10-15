@@ -4,32 +4,40 @@ import { LINKS } from '@/shared/constants'
 import { failureToast, successToast } from '@/shared/lib/toast'
 import { Button } from '@/shared/ui'
 
-import { parseYandexIframe } from '../lib/parseYandexIframe'
+import { parseSpotifyUrl } from '../lib/parseSpotifyUrl'
 
-import { useYandexPlaylists } from '@/entities/YandexMusic'
+import { useSpotifyPlaylists } from '@/entities/Spotify'
 
 export function AddPlaylistForm() {
-	const [iframeCode, setIframeCode] = useState('')
+	const [playlistUrl, setPlaylistUrl] = useState('')
+	const [playlistName, setPlaylistName] = useState('')
 	const [isAdding, setIsAdding] = useState(false)
-	const { addPlaylist } = useYandexPlaylists()
+	const { addPlaylist } = useSpotifyPlaylists()
 
 	function handleAdd() {
-		const result = parseYandexIframe(iframeCode)
-
-		if (!result.success) {
-			failureToast(result.error || 'Ошибка парсинга', false)
+		if (!playlistName.trim()) {
+			failureToast('Введите название плейлиста', false)
 			return
 		}
 
-		addPlaylist(result.name!, result.url!)
+		const embedUrl = parseSpotifyUrl(playlistUrl)
+
+		if (!embedUrl) {
+			failureToast('Неверная ссылка на Spotify плейлист', false)
+			return
+		}
+
+		addPlaylist(playlistName, embedUrl)
 		successToast('Плейлист добавлен', true)
-		setIframeCode('')
+		setPlaylistUrl('')
+		setPlaylistName('')
 		setIsAdding(false)
 	}
 
 	function handleCancel() {
 		setIsAdding(false)
-		setIframeCode('')
+		setPlaylistUrl('')
+		setPlaylistName('')
 	}
 
 	if (!isAdding) {
@@ -52,20 +60,27 @@ export function AddPlaylistForm() {
 				<ol className='ml-3 list-decimal space-y-0.5 text-[10px] opacity-80'>
 					<li>
 						Откройте плейлист на{' '}
-						<a href={LINKS.YANDEX_MUSIC} target='_blank'>
-							music.yandex.ru{' '}
+						<a href={LINKS.SPOTIFY} target='_blank'>
+							open.spotify.com{' '}
 						</a>
 					</li>
-					<li>Нажмите «Поделиться» → «HTML-код»</li>
-					<li>Скопируйте код и вставьте ниже</li>
+					<li>Скопируйте URL из адресной строки</li>
+					<li>Вставьте ссылку и введите название</li>
 				</ol>
 			</div>
-			<textarea
+			<input
+				type='text'
 				className='cancelDrag w-full rounded-lg border border-[var(--color-secondary-border)] bg-transparent p-2 text-sm placeholder-gray-400 dark:border-[var(--color-default-hover)]'
-				placeholder='Вставьте код iframe из Яндекс.Музыки...'
-				rows={3}
-				value={iframeCode}
-				onChange={e => setIframeCode(e.target.value)}
+				placeholder='Название плейлиста...'
+				value={playlistName}
+				onChange={e => setPlaylistName(e.target.value)}
+			/>
+			<input
+				type='text'
+				className='cancelDrag w-full rounded-lg border border-[var(--color-secondary-border)] bg-transparent p-2 text-sm placeholder-gray-400 dark:border-[var(--color-default-hover)]'
+				placeholder='https://open.spotify.com/playlist/...'
+				value={playlistUrl}
+				onChange={e => setPlaylistUrl(e.target.value)}
 			/>
 			<div className='flex gap-2'>
 				<Button

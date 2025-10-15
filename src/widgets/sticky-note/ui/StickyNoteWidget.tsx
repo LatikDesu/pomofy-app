@@ -52,7 +52,7 @@ export function StickyNoteWidget({ id, text, color, isLocked }: StickyNoteWidget
 			className='relative rounded-md bg-[#feff9c] text-[var(--text-secondary)] shadow-md'
 			style={{ backgroundColor: color, width: size.width, height: size.height }}
 		>
-			<div className='relative flex w-full items-center justify-end px-3 pt-2 pb-1'>
+			<div className='relative flex w-full items-center justify-end px-2'>
 				<div className='absolute inset-0 cursor-move' {...dragHandleProps} />
 				<div className='relative z-10 flex items-center gap-2'>
 					<ColorSelector noteId={id} />

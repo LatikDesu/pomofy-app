@@ -7,7 +7,7 @@ import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
-import { YandexIcon } from '@/shared/icons'
+import { SpotifyIcon, YandexIcon } from '@/shared/icons'
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import useSetDefault from '@/shared/lib/useSetDefault'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
@@ -16,6 +16,7 @@ import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
 import { DraggableNavItem } from './DraggableNavItem'
 import { SideBarItem } from './SideBarItem'
+import { useSpotifyMusic } from '@/entities/Spotify'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
@@ -29,6 +30,7 @@ export const SideBar = () => {
 	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
 	const { isYandexToggled, setIsYandexToggled, isYandexShown } = useYandexMusic()
+	const { isSpotifyToggled, setIsSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
 	const setDefault = useSetDefault()
 	const { isWidgetResetShown } = useToggleWidgetReset()
 	const { isStickyNoteShown } = useToggleStickyNote()
@@ -109,9 +111,19 @@ export const SideBar = () => {
 			toggleString: 'Яндекс. Музыка',
 			toggleIcon: '🎵',
 			isShown: isYandexShown
+		},
+		{
+			id: '8',
+			content: <SpotifyIcon className='h-6 w-6' />,
+			tooltipTitle: 'Spotify',
+			isToggled: isSpotifyToggled,
+			setToggled: setIsSpotifyToggled,
+			toggleString: 'Spotify',
+			toggleIcon: '🎵',
+			isShown: isSpotifyShown
 		}
 		// {
-		//   id: "8",
+		//   id: "9",
 		//   content: <BsFillChatLeftQuoteFill className="h-6 w-6" />,
 		//   tooltipTitle: "Quotes",
 		//   isToggled: isQuoteToggled,
