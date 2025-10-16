@@ -17,7 +17,7 @@ export function useYouTubeResize(initialWidth = 384, initialHeight = 240) {
 		const startHeight = size.height
 
 		function handleMouseMove(e: MouseEvent) {
-			const newWidth = Math.max(320, startWidth + (e.clientX - startX))
+			const newWidth = Math.max(384, startWidth + (e.clientX - startX))
 			const newHeight = Math.max(240, startHeight + (e.clientY - startY))
 			setSize({ width: newWidth, height: newHeight })
 		}

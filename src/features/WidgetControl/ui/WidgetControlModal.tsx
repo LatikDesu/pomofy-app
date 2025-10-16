@@ -10,13 +10,13 @@ import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 import { NeumorphButton } from '@/shared/ui'
 import { Modal, ModalBody, ModalContent, ModalTrigger } from '@/shared/ui/Modal'
 
-import { WidgetButton } from './WidgetButton'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
+import { WidgetButton } from './WidgetButton'
 
 export const WidgetControlModal = () => {
 	const { isTimerShown, setIsTimerShown } = useToggleTimer()
@@ -44,22 +44,16 @@ export const WidgetControlModal = () => {
 					<hr className='mb-3 border-t border-[var(--color-secondary-border)] dark:border-[var(--color-default-hover)]' />
 					<div className='grid grid-cols-2 gap-2 text-center sm:grid-cols-3'>
 						<WidgetButton
-							isActive={isTasksShown}
-							onClick={() => setIsTasksShown(!isTasksShown)}
-							title='Трекер задач'
-							icon={<ListTodo className='h-6 w-6' />}
-						/>
-						<WidgetButton
 							isActive={isTimerShown}
 							onClick={() => setIsTimerShown(!isTimerShown)}
 							title='Таймер'
 							icon={<Timer className='h-6 w-6' />}
 						/>
 						<WidgetButton
-							isActive={isDarkModeShown}
-							onClick={() => setIsDarkModeShown(!isDarkModeShown)}
-							title='Тема'
-							icon={<MdWbSunny className='h-6 w-6' />}
+							isActive={isTasksShown}
+							onClick={() => setIsTasksShown(!isTasksShown)}
+							title='Трекер задач'
+							icon={<ListTodo className='h-6 w-6' />}
 						/>
 						{isDesktop && (
 							<WidgetButton
@@ -67,20 +61,6 @@ export const WidgetControlModal = () => {
 								onClick={() => setIsStickyNoteShown(!isStickyNoteShown)}
 								title='Заметки'
 								icon={<MdOutlineNoteAdd className='h-6 w-6' />}
-							/>
-						)}
-						<WidgetButton
-							isActive={isWidgetResetShown}
-							onClick={() => setIsWidgetResetShown(!isWidgetResetShown)}
-							title='Сброс'
-							icon={<RotateCcw className='h-6 w-6' />}
-						/>
-						{isDesktop && (
-							<WidgetButton
-								isActive={isFullscreenShown}
-								onClick={() => setIsFullscreenShown(!isFullscreenShown)}
-								title='Экран'
-								icon={<BsArrowsFullscreen className='h-6 w-6' />}
 							/>
 						)}
 						<WidgetButton
@@ -101,6 +81,26 @@ export const WidgetControlModal = () => {
 								onClick={() => setIsYouTubeShown(!isYouTubeShown)}
 								title='YouTube'
 								icon={<YouTubeIcon className='h-6 w-6' />}
+							/>
+						)}
+						<WidgetButton
+							isActive={isDarkModeShown}
+							onClick={() => setIsDarkModeShown(!isDarkModeShown)}
+							title='Тема'
+							icon={<MdWbSunny className='h-6 w-6' />}
+						/>
+						<WidgetButton
+							isActive={isWidgetResetShown}
+							onClick={() => setIsWidgetResetShown(!isWidgetResetShown)}
+							title='Сброс'
+							icon={<RotateCcw className='h-6 w-6' />}
+						/>
+						{isDesktop && (
+							<WidgetButton
+								isActive={isFullscreenShown}
+								onClick={() => setIsFullscreenShown(!isFullscreenShown)}
+								title='Экран'
+								icon={<BsArrowsFullscreen className='h-6 w-6' />}
 							/>
 						)}
 					</div>
