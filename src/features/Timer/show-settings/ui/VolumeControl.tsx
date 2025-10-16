@@ -17,6 +17,9 @@ export const VolumeControl = () => {
 				max={1}
 				step={0.1}
 				className='pb-1'
+				classNames={{
+					track: 'h-1.5'
+				}}
 			/>
 		</div>
 	)

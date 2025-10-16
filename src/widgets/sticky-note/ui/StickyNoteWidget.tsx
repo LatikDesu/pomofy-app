@@ -1,4 +1,3 @@
-import { GripIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import {
@@ -8,6 +7,7 @@ import {
 	StickyNoteEditor
 } from '@/features/StickyNote'
 
+import { Resize } from '@/shared/icons'
 import { useDragHandle } from '@/shared/ui'
 
 import type { ColorOption } from '@/entities/StickyNote'
@@ -65,7 +65,7 @@ export function StickyNoteWidget({ id, text, color, isLocked }: StickyNoteWidget
 				className='absolute right-1 bottom-1 z-20 cursor-nwse-resize'
 				onMouseDown={handleMouseDown}
 			>
-				<GripIcon size={16} className='rotate-90 text-gray-500' />
+				<Resize />
 			</div>
 		</div>
 	)

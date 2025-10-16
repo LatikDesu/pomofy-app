@@ -4,7 +4,7 @@ import { MdOutlineNoteAdd, MdWbSunny, MdWidgets } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
-import { SpotifyIcon, YandexIcon } from '@/shared/icons'
+import { SpotifyIcon, YandexIcon, YouTubeIcon } from '@/shared/icons'
 import useMediaQuery from '@/shared/lib/useMediaQuery'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 import { NeumorphButton } from '@/shared/ui'
@@ -16,6 +16,7 @@ import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
 import { useYandexMusic } from '@/entities/YandexMusic'
+import { useYouTubeMusic } from '@/entities/YouTube'
 
 export const WidgetControlModal = () => {
 	const { isTimerShown, setIsTimerShown } = useToggleTimer()
@@ -26,6 +27,7 @@ export const WidgetControlModal = () => {
 	const { isWidgetResetShown, setIsWidgetResetShown } = useToggleWidgetReset()
 	const { isYandexShown, setIsYandexShown } = useYandexMusic()
 	const { isSpotifyShown, setIsSpotifyShown } = useSpotifyMusic()
+	const { isYouTubeShown, setIsYouTubeShown } = useYouTubeMusic()
 	const isDesktop = useMediaQuery('(min-width: 641px)')
 	const isDark = useDarkToggleStore(state => state.isDark)
 
@@ -93,6 +95,14 @@ export const WidgetControlModal = () => {
 							title='Spotify'
 							icon={<SpotifyIcon className='h-6 w-6' />}
 						/>
+						{isDesktop && (
+							<WidgetButton
+								isActive={isYouTubeShown}
+								onClick={() => setIsYouTubeShown(!isYouTubeShown)}
+								title='YouTube'
+								icon={<YouTubeIcon className='h-6 w-6' />}
+							/>
+						)}
 					</div>
 				</ModalContent>
 			</ModalBody>

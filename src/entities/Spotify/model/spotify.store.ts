@@ -18,7 +18,7 @@ export const useSpotifyMusic = create<IToggleSpotify>()(
 		(set, _) => ({
 			isSpotifyToggled: true,
 			setIsSpotifyToggled: isSpotifyToggled => set({ isSpotifyToggled }),
-			isSpotifyShown: true,
+			isSpotifyShown: false,
 			setIsSpotifyShown: isSpotifyShown => set({ isSpotifyShown })
 		}),
 		{

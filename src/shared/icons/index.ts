@@ -1,2 +1,8 @@
+export { ArrowNext } from './ArrowNext'
+export { ArrowSkip } from './ArrowSkip'
+export { Resize } from './Resize'
 export { SpotifyIcon } from './spotify'
+export { VolumeFull } from './VolumeFull'
+export { VolumeMute } from './VolumeMute'
 export { YandexIcon } from './yandex'
+export { YouTubeIcon } from './youtube'

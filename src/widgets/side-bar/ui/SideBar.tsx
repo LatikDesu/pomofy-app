@@ -7,7 +7,7 @@ import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
-import { SpotifyIcon, YandexIcon } from '@/shared/icons'
+import { SpotifyIcon, YandexIcon, YouTubeIcon } from '@/shared/icons'
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import useSetDefault from '@/shared/lib/useSetDefault'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
@@ -21,6 +21,7 @@ import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
 import { useYandexMusic } from '@/entities/YandexMusic'
+import { useYouTubeMusic } from '@/entities/YouTube'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -31,6 +32,7 @@ export const SideBar = () => {
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
 	const { isYandexToggled, setIsYandexToggled, isYandexShown } = useYandexMusic()
 	const { isSpotifyToggled, setIsSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
+	const { isYouTubeToggled, setIsYouTubeToggled, isYouTubeShown } = useYouTubeMusic()
 	const setDefault = useSetDefault()
 	const { isWidgetResetShown } = useToggleWidgetReset()
 	const { isStickyNoteShown } = useToggleStickyNote()
@@ -121,6 +123,16 @@ export const SideBar = () => {
 			toggleString: 'Spotify',
 			toggleIcon: '🎵',
 			isShown: isSpotifyShown
+		},
+		{
+			id: '9',
+			content: <YouTubeIcon className='h-6 w-6' />,
+			tooltipTitle: 'YouTube',
+			isToggled: isYouTubeToggled,
+			setToggled: setIsYouTubeToggled,
+			toggleString: 'YouTube',
+			toggleIcon: '▶️',
+			isShown: isYouTubeShown
 		}
 		// {
 		//   id: "9",

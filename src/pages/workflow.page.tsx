@@ -13,11 +13,13 @@ import { usePosSpotify, useSpotifyMusic } from '@/entities/Spotify'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
 import { usePosTimer, useToggleTimer } from '@/entities/Timer'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
+import { usePosYouTube, useYouTubeMusic } from '@/entities/YouTube'
 import { SpotifyWidget } from '@/widgets/spotify'
 import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
 import { TimerWidget } from '@/widgets/timer'
 import { YandexWidget } from '@/widgets/yandex-music'
+import { YouTubeWidget } from '@/widgets/youtube'
 
 export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -29,6 +31,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { yandexPosX, yandexPosY, setYandexPos } = usePosYandex()
 	const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
 	const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify()
+	const { isYouTubeToggled, isYouTubeShown } = useYouTubeMusic()
+	const { youtubePosX, youtubePosY, setYouTubePos } = usePosYouTube()
 	const { grid } = useGrid()
 
 	return (
@@ -100,6 +104,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<SpotifyWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isYouTubeToggled && isYouTubeShown}
+						defaultX={youtubePosX}
+						defaultY={youtubePosY}
+						setPosition={setYouTubePos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<YouTubeWidget />
 					</DWrapper>
 				</>
 			)}
