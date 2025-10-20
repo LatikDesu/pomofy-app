@@ -12,14 +12,14 @@ import {
 	useYouTubeResize
 } from '../lib'
 
-import { YouTubeFullPlayer } from './YouTubeFullPlayer'
-import { YouTubeMiniPlayer } from './YouTubeMiniPlayer'
 import {
 	useDynamicPlaylist,
 	useYouTubeMusic,
 	useYouTubePlayer,
 	useYouTubePlaylists
 } from '@/entities/YouTube'
+import { YouTubeFullPlayer } from './YouTubeFullPlayer'
+import { YouTubeMiniPlayer } from './YouTubeMiniPlayer'
 
 export function YouTubeWidget() {
 	const { setIsYouTubeToggled } = useYouTubeMusic()
@@ -102,7 +102,6 @@ export function YouTubeWidget() {
 
 	return (
 		<WidgetWrapper
-			className='!w-auto'
 			style={{ width: `${size.width}px` }}
 			actions={actions}
 			leftActions={leftActions}

@@ -154,6 +154,7 @@ export function getDateFormatList(): Array<{ value: string; label: string; examp
 	const now = new Date()
 
 	const formats = [
+		{ value: '', label: 'Без даты' },
 		{ value: '%d.%m.%Y', label: 'ДД.ММ.ГГГГ' },
 		{ value: '%m/%d/%Y', label: 'ММ/ДД/ГГГГ (US)' },
 		{ value: '%Y-%m-%d', label: 'ГГГГ-ММ-ДД (ISO)' },
