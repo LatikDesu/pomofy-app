@@ -24,7 +24,7 @@ export const YandexWidget = () => {
 	)
 
 	return (
-		<WidgetWrapper className='!w-72 sm:!w-88' actions={actions}>
+		<WidgetWrapper className='!w-72' actions={actions}>
 			<div className='cancelDrag justify-center rounded-lg p-2 pt-0'>
 				<iframe
 					key={iframeSrc}
