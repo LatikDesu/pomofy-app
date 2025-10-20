@@ -1,5 +1,7 @@
 export { NeumorphButton } from './Button'
+export { Checkbox } from './Checkbox'
 export { CloseWidgetButton } from './CloseWidgetButton'
+export { ColorPicker } from './ColorPicker'
 export { Button, buttonVariants } from './CommonButton'
 export { CustomizationButton } from './CustomizationButton'
 export { DWrapper, useDragHandle } from './Draggable'

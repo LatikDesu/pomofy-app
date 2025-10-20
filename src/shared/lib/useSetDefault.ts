@@ -1,6 +1,7 @@
 import { usePosSpotify } from '@/entities/Spotify'
 import { usePosTask } from '@/entities/Task'
 import { usePosTimer } from '@/entities/Timer'
+import { usePosWatch } from '@/entities/Watch'
 import { usePosYandex } from '@/entities/YandexMusic'
 import { usePosYouTube } from '@/entities/YouTube'
 
@@ -10,6 +11,7 @@ function useSetDefault() {
 	const { setYandexPosDefault } = usePosYandex()
 	const { setSpotifyPosDefault } = usePosSpotify()
 	const { setYouTubePosDefault } = usePosYouTube()
+	const { setWatchPosDefault } = usePosWatch()
 
 	return () => {
 		// Reset all widget positions
@@ -18,6 +20,7 @@ function useSetDefault() {
 		setYandexPosDefault()
 		setSpotifyPosDefault()
 		setYouTubePosDefault()
+		setWatchPosDefault()
 	}
 }
 

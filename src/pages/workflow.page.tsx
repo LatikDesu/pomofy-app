@@ -12,12 +12,14 @@ import { BackgroundModal } from '@/entities/Backgrounds'
 import { usePosSpotify, useSpotifyMusic } from '@/entities/Spotify'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
 import { usePosTimer, useToggleTimer } from '@/entities/Timer'
+import { usePosWatch, useToggleWatch } from '@/entities/Watch'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
 import { usePosYouTube, useYouTubeMusic } from '@/entities/YouTube'
 import { SpotifyWidget } from '@/widgets/spotify'
 import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
 import { TimerWidget } from '@/widgets/timer'
+import { WatchWidget } from '@/widgets/watch'
 import { YandexWidget } from '@/widgets/yandex-music'
 import { YouTubeWidget } from '@/widgets/youtube'
 
@@ -27,6 +29,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { taskPosX, taskPosY, setTaskPos } = usePosTask()
 	const { isTimerToggled, isTimerShown } = useToggleTimer()
 	const { timerPosX, timerPosY, setTimerPos } = usePosTimer()
+	const { isWatchToggled, isWatchShown } = useToggleWatch()
+	const { watchPosX, watchPosY, setWatchPos } = usePosWatch()
 	const { isYandexToggled, isYandexShown } = useYandexMusic()
 	const { yandexPosX, yandexPosY, setYandexPos } = usePosYandex()
 	const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
@@ -50,6 +54,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 					</div>
 					<div className={clsx(isTasksToggled ? 'block' : 'hidden')}>
 						<TaskTrackerWidget />
+					</div>
+					<div className={clsx(isWatchToggled ? 'block' : 'hidden')}>
+						<WatchWidget />
 					</div>
 					<div className={clsx(isYandexToggled ? 'block' : 'hidden')}>
 						<YandexWidget />
@@ -82,6 +89,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<TimerWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isWatchToggled && isWatchShown}
+						defaultX={watchPosX}
+						defaultY={watchPosY}
+						setPosition={setWatchPos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<WatchWidget />
 					</DWrapper>
 					<DWrapper
 						toggleHook={isYandexToggled && isYandexShown}

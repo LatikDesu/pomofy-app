@@ -1,5 +1,5 @@
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
+import { Clock, ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
 import { useState } from 'react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { IoMenu } from 'react-icons/io5'
@@ -20,6 +20,7 @@ import { useSpotifyMusic } from '@/entities/Spotify'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
+import { useToggleWatch } from '@/entities/Watch'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
 
@@ -30,6 +31,7 @@ export const SideBar = () => {
 	const { isDark, toggleDarkMode, isDarkModeShown } = useDarkToggleStore()
 	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
+	const { isWatchToggled, setIsWatchToggled, isWatchShown } = useToggleWatch()
 	const { isYandexToggled, setIsYandexToggled, isYandexShown } = useYandexMusic()
 	const { isSpotifyToggled, setIsSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
 	const { isYouTubeToggled, setIsYouTubeToggled, isYouTubeShown } = useYouTubeMusic()
@@ -60,6 +62,16 @@ export const SideBar = () => {
 			toggleString: 'Таймер',
 			toggleIcon: '🍅',
 			isShown: isTimerShown
+		},
+		{
+			id: '10',
+			content: <Clock className='h-6 w-6' />,
+			tooltipTitle: 'Часы',
+			isToggled: isWatchToggled,
+			setToggled: setIsWatchToggled,
+			toggleString: 'Часы',
+			toggleIcon: '🕐',
+			isShown: isWatchShown
 		},
 		{
 			id: '3',

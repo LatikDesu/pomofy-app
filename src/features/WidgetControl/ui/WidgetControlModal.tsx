@@ -1,4 +1,4 @@
-import { ListTodo, RotateCcw, Timer } from 'lucide-react'
+import { ListTodo, RotateCcw, Timer, WatchIcon } from 'lucide-react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { MdOutlineNoteAdd, MdWbSunny, MdWidgets } from 'react-icons/md'
 
@@ -10,13 +10,14 @@ import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 import { NeumorphButton } from '@/shared/ui'
 import { Modal, ModalBody, ModalContent, ModalTrigger } from '@/shared/ui/Modal'
 
+import { WidgetButton } from './WidgetButton'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
 import { useToggleTimer } from '@/entities/Timer'
+import { useToggleWatch } from '@/entities/Watch'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
-import { WidgetButton } from './WidgetButton'
 
 export const WidgetControlModal = () => {
 	const { isTimerShown, setIsTimerShown } = useToggleTimer()
@@ -28,6 +29,7 @@ export const WidgetControlModal = () => {
 	const { isYandexShown, setIsYandexShown } = useYandexMusic()
 	const { isSpotifyShown, setIsSpotifyShown } = useSpotifyMusic()
 	const { isYouTubeShown, setIsYouTubeShown } = useYouTubeMusic()
+	const { isWatchShown, setIsWatchShown } = useToggleWatch()
 	const isDesktop = useMediaQuery('(min-width: 641px)')
 	const isDark = useDarkToggleStore(state => state.isDark)
 
@@ -83,6 +85,12 @@ export const WidgetControlModal = () => {
 								icon={<YouTubeIcon className='h-6 w-6' />}
 							/>
 						)}
+						<WidgetButton
+							isActive={isWatchShown}
+							onClick={() => setIsWatchShown(!isWatchShown)}
+							title='Часы'
+							icon={<WatchIcon className='h-6 w-6' />}
+						/>
 						<WidgetButton
 							isActive={isDarkModeShown}
 							onClick={() => setIsDarkModeShown(!isDarkModeShown)}
