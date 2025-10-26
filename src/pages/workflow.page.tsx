@@ -9,6 +9,7 @@ import { useGrid } from '@/shared/store'
 import { DWrapper } from '@/shared/ui'
 
 import { BackgroundModal } from '@/entities/Backgrounds'
+import { usePosKanban, useToggleKanban } from '@/entities/Kanban'
 import { usePosQuickLinks, useToggleQuickLinks } from '@/entities/QuickLinks'
 import { usePosSpotify, useSpotifyMusic } from '@/entities/Spotify'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
@@ -16,6 +17,7 @@ import { usePosTimer, useToggleTimer } from '@/entities/Timer'
 import { usePosWatch, useToggleWatch } from '@/entities/Watch'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
 import { usePosYouTube, useYouTubeMusic } from '@/entities/YouTube'
+import { KanbanWidget } from '@/widgets/kanban'
 import { QuickLinksWidget } from '@/widgets/quick-links'
 import { SpotifyWidget } from '@/widgets/spotify'
 import { StickyNotesList } from '@/widgets/sticky-note'
@@ -41,6 +43,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { youtubePosX, youtubePosY, setYouTubePos } = usePosYouTube()
 	const { isQuickLinksToggled, isQuickLinksShown } = useToggleQuickLinks()
 	const { quickLinksPosX, quickLinksPosY, setQuickLinksPos } = usePosQuickLinks()
+	const { isKanbanToggled, isKanbanShown } = useToggleKanban()
+	const { kanbanPosX, kanbanPosY, setKanbanPos } = usePosKanban()
 	const { grid } = useGrid()
 
 	return (
@@ -61,6 +65,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 					</div>
 					<div className={clsx(isTasksToggled ? 'block' : 'hidden')}>
 						<TaskTrackerWidget />
+					</div>
+					<div className={clsx(isKanbanToggled ? 'block' : 'hidden')}>
+						<KanbanWidget />
 					</div>
 					<div className={clsx(isQuickLinksToggled ? 'block' : 'hidden')}>
 						<QuickLinksWidget />
@@ -151,6 +158,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<QuickLinksWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isKanbanToggled && isKanbanShown}
+						defaultX={kanbanPosX}
+						defaultY={kanbanPosY}
+						setPosition={setKanbanPos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<KanbanWidget />
 					</DWrapper>
 				</>
 			)}

@@ -1,5 +1,5 @@
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Clock, Link, ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
+import { Clock, Link, ListTodo, RotateCcw, SquareKanban, StickyNote, Timer } from 'lucide-react'
 import { useState } from 'react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { IoMenu } from 'react-icons/io5'
@@ -16,6 +16,7 @@ import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
 import { DraggableNavItem } from './DraggableNavItem'
 import { SideBarItem } from './SideBarItem'
+import { useToggleKanban } from '@/entities/Kanban'
 import { useToggleQuickLinks } from '@/entities/QuickLinks'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
@@ -41,7 +42,7 @@ export const SideBar = () => {
 	const { stickyNotes, addStickyNote } = useStickyNote()
 	const { isQuickLinksToggled, setIsQuickLinksToggled, isQuickLinksShown } = useToggleQuickLinks()
 	const { isWatchToggled, setIsWatchToggled, isWatchShown } = useToggleWatch()
-
+	const { isKanbanToggled, setIsKanbanToggled, isKanbanShown } = useToggleKanban()
 	const theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
 
 	const sideNavItems = [
@@ -157,17 +158,17 @@ export const SideBar = () => {
 			toggleString: 'Полноэкранный режим',
 			toggleIcon: '',
 			isShown: isFullscreenShown
+		},
+		{
+			id: '12',
+			content: <SquareKanban className='h-6 w-6' />,
+			tooltipTitle: 'Доска задач',
+			isToggled: isKanbanToggled,
+			setToggled: setIsKanbanToggled,
+			toggleString: 'Доска задач',
+			toggleIcon: '📃',
+			isShown: isKanbanShown
 		}
-		// {
-		//   id: "11",
-		//   content: <MdOutlineViewKanban className="h-6 w-6" />,
-		//   tooltipTitle: "Kanban",
-		//   isToggled: isKanbanToggled,
-		//   setToggled: setIsKanbanToggled,
-		//   toggleString: "Kanban Toggled",
-		//   toggleIcon: "📃",
-		//   isShown: isKanbanShown,
-		// },
 	]
 
 	function toggleDefaultPositions() {

@@ -1,13 +1,12 @@
 import { version } from '@Root/package.json'
 import { DndContext } from '@dnd-kit/core'
+import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import { Backgrounds } from '@/features/Backgrounds'
 import { useSetDefault } from '@/features/SetDefault'
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
 
 import { useDarkToggleStore, useSeoVisibilityStore } from '@/shared/store'
 
@@ -59,7 +58,6 @@ function RootLayout() {
 				>
 					<Toaster />
 					<Analytics />
-					<SpeedInsights />
 					<SideBar />
 					<WorkflowPage ref={workflowPageRef} />
 					<InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />
