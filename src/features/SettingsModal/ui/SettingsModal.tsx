@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IoMdSettings } from 'react-icons/io'
 
 import { useSetDefault } from '@/features/SetDefault'
+
 import { successToast } from '@/shared/lib/toast'
 import {
 	useDarkToggleStore,

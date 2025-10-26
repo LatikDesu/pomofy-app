@@ -1,6 +1,7 @@
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 
+import { LINKS } from '@/shared/constants'
 import { failureToast } from '@/shared/lib/toast'
 import {
 	Input,
@@ -16,7 +17,6 @@ import {
 } from '@/shared/ui'
 
 import { useQuickLinks, useQuickLinksSettings } from '@/entities/QuickLinks'
-import { LINKS } from '@/shared/constants'
 
 export function AddLinkForm() {
 	const { addLink, groups } = useQuickLinks()

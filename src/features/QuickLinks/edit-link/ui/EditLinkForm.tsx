@@ -1,11 +1,11 @@
 import { Pencil } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
+import { LINKS } from '@/shared/constants'
 import { Input, Select } from '@/shared/ui'
 import { SubmitButton } from '@/shared/ui/SubmitButton'
 
 import { type IQuickLink, useQuickLinks, useQuickLinksSettings } from '@/entities/QuickLinks'
-import { LINKS } from '@/shared/constants'
 
 interface EditLinkFormProps {
 	link: IQuickLink

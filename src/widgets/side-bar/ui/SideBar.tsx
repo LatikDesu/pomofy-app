@@ -6,14 +6,16 @@ import { IoMenu } from 'react-icons/io5'
 import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
-
 import { useSetDefault } from '@/features/SetDefault'
+
 import { SpotifyIcon, YandexIcon, YouTubeIcon } from '@/shared/icons'
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
 import { useToggleQuickLinks } from '@/entities/QuickLinks'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
@@ -22,8 +24,6 @@ import { useToggleTimer } from '@/entities/Timer'
 import { useToggleWatch } from '@/entities/Watch'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
-import { DraggableNavItem } from './DraggableNavItem'
-import { SideBarItem } from './SideBarItem'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -42,7 +42,7 @@ export const SideBar = () => {
 	const { isQuickLinksToggled, setIsQuickLinksToggled, isQuickLinksShown } = useToggleQuickLinks()
 	const { isWatchToggled, setIsWatchToggled, isWatchShown } = useToggleWatch()
 
-	let theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
+	const theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
 
 	const sideNavItems = [
 		{
