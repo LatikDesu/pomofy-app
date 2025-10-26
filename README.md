@@ -1,153 +1,156 @@
 # Pomofy
 
-Интерактивное веб-приложение для управления рабочим процессом.
+Interactive web application for workflow management.
 
 [![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.14-38B2AC.svg)](https://tailwindcss.com/)
 [![Zustand](https://img.shields.io/badge/Zustand-5.0.8-purple.svg)](https://zustand-demo.pmnd.rs/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.23.22-pink.svg)](https://www.framer.com/motion/)
-[![Radix UI](https://img.shields.io/badge/Radix_UI-1.3.6-black.svg)](https://www.radix-ui.com/)
 [![@dnd-kit](https://img.shields.io/badge/@dnd--kit-6.3.1-orange.svg)](https://dndkit.com/)
-[![React Hot Toast](https://img.shields.io/badge/React_Hot_Toast-2.6.0-green.svg)](https://react-hot-toast.com/)
 [![React Player](https://img.shields.io/badge/React_Player-2.16.0-red.svg)](https://github.com/cookpete/react-player)
 
-## ✨ Возможности
+[🇷🇺 Russian](README.ru.md) | [🇺🇸 English](README.md)
 
-- **🕒 Pomodoro таймер** - настройка рабочих сессий и перерывов с автоматическим переключением
-- **🎵 Яндекс.Музыка** - встроенный плеер с управлением плейлистами и настройками
-- **🎶 Spotify** - встроенный плеер с добавлением пользовательских плейлистов
-- **📺 YouTube** - встроенный видеоплеер с управлением плейлистами и настройками
-- **📋 Трекер задач** - управление задачами с возможностью отметки выполненных
-- **📊 Канбан доска** - интерактивная доска задач с drag-and-drop между колонками
-- **📝 Быстрые заметки** - создание и управление перетаскиваемыми заметками с цветовой кодировкой
-- **🔗 Быстрые ссылки** - управление коллекцией полезных ссылок с быстрым доступом
-- **🕐 Виджет часов** - отображение текущего времени и погоды
-- **🎨 Перетаскиваемые виджеты** - интерактивные виджеты, которые можно перемещать по экрану на десктопе
-- **🌈 Динамичные фоны** - выбор из различных фоновых изображений и эффектов
-- **🔊 Звуковые уведомления** - звуковые сигналы при смене режимов работы
-- **📱 Адаптивный дизайн** - оптимизация интерфейса для мобильных устройств
-- **⚡ Drag & Drop** - интуитивное взаимодействие с элементами интерфейса
+## ✨ Features
 
-## 🛠️ Технологии
+- **🕒 Pomodoro Timer** - customizable work sessions and breaks with automatic switching
+- **📋 Task Tracker** - task management synchronized with timer
+- **📊 Kanban Board** - interactive board for task management and workflow visualization
+- **🎵 Yandex Music** - built-in player with custom playlist management
+- **🎶 Spotify** - built-in player with custom playlist management
+- **📺 YouTube** - built-in video player with playlist management and search
+- **📝 Sticky Notes** - create and edit notes with Markdown support and customization
+- **🔗 Quick Links** - manage collection of useful links with quick access
+- **🕐 Clock Widget** - display current time and weather
+- **🌈 Dynamic Backgrounds** - choose from various background images and effects
+- **🔊 Sound Notifications** - audio signals when switching work modes
+- **⚡ Drag & Drop** - intuitive interface element interaction
 
-Основной стек технологий включает современные инструменты для создания интерактивных веб-приложений с акцентом на производительность и пользовательский опыт.
+## 🐳 Deployment with Docker
 
-## 🚀 Быстрый старт
+1. Create a `docker-compose.yml` file.
+2. Paste the content below into the file.
+3. Add .env to work with Youtube API
+4. Run the command: `docker-compose up -d`
+5. Open `http://localhost:3000` in your browser.
 
-### Требования
+### docker-compose.yml
+
+```yaml
+services:
+  pomofy:
+    image: esoraine/pomofy-app:latest
+    container_name: pomofy-app
+    ports:
+      - '3000:80'
+    restart: always
+```
+
+## 🚀 Quick Start
+
+### Requirements
 
 - **Node.js** 18+
-- **Bun** (рекомендуется) или **npm**
+- **Bun** (recommended) or **npm**
 
-### Установка
+### Installation
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 
    ```bash
    git clone <repository-url>
    cd pomofy-app
    ```
 
-2. Установите зависимости:
+2. Install dependencies:
 
    ```bash
    bun install
-   # или
+   # or
    npm install
    ```
 
-3. Запустите проект в режиме разработки:
+3. Start the development server:
 
    ```bash
    bun dev
-   # или
+   # or
    npm run dev
    ```
 
-4. Откройте браузер и перейдите по адресу `http://localhost:5173`
+4. Open your browser and navigate to `http://localhost:5173`
 
-## 📜 Доступные скрипты
+## 🎯 Main Components
 
-- `bun dev` - запуск сервера разработки
-- `bun build` - сборка для продакшена
-- `bun preview` - предварительный просмотр продакшн сборки
-- `bun lint` - проверка кода линтером
-- `bun format` - форматирование кода
+### Timer (TimerWidget)
 
-## 🎯 Основные компоненты
+- Customize Pomodoro session duration
+- Choose break type (short/long)
+- Automatic mode switching
+- Sound notifications
+- Display remaining time
 
-### Таймер (TimerWidget)
+### Task Tracker (TaskTrackerWidget)
 
-- Настройка длительности Pomodoro сессий
-- Выбор типа перерыва (короткий/длинный)
-- Автоматическое переключение режимов
-- Звуковые уведомления
-- Отображение оставшегося времени
+- Create and manage tasks
+- Automatic tracking according to timer
 
-### Яндекс.Музыка (YandexWidget)
+### Kanban Board (KanbanWidget)
 
-- Встроенный плеер Яндекс.Музыки
-- Добавление пользовательских плейлистов
+- Drag-and-drop task movement between columns and within columns
+- Create, edit, and delete tasks with multi-line descriptions
+- Minimalist design with quick access to main functions
+
+### Yandex Music (YandexWidget)
+
+- Built-in Yandex Music player
+- Create and manage custom playlists
 
 ### Spotify (SpotifyWidget)
 
-- Встроенный плеер Spotify
-- Добавление пользовательских плейлистов
+- Built-in Spotify player
+- Create and manage custom playlists
 
 ### YouTube (YouTubeWidget)
 
-- Встроенный видеоплеер YouTube
-- Создание и управление пользовательскими плейлистами
-- Мини-режим для компактного просмотра
-- Клавиатурные горячие клавиши (пробел, стрелки, M для mute)
-- Автоматическое воспроизведение следующего видео
-- Поиск и добавление видео по запросу
+- Built-in YouTube video player
+- Create and manage custom playlists
+- Mini-mode for compact viewing
+- Keyboard shortcuts (space, arrows, M for mute)
+- Search and add videos by query
 
-### Трекер задач (TaskTrackerWidget)
+### Sticky Notes (StickyNotesWidget)
 
-- Создание и управление задачами
-- Отметка выполненных задач
-- Автоматическое отслеживание согласно таймера
+- Create and edit notes on the workspace
+- Choose note color from palette
+- Resize notes
+- Lock notes to prevent accidental editing
 
-### Канбан доска (KanbanWidget)
+### Quick Links (QuickLinksWidget)
 
-- Drag-and-drop перемещение задач между колонками и внутри колонок
-- Создание, редактирование и удаление задач с многострочным описанием
-- Минималистичный дизайн с быстрым доступом к основным функциям
+- Manage collection of useful links and resources
+- Organize links by categories
 
-### Быстрые заметки (StickyNotesWidget)
+### Clock Widget (WatchWidget)
 
-- Создание и редактирование заметок на рабочей области
-- Выбор цвета заметки из палитры
-- Изменение размера заметок
-- Блокировка заметок для предотвращения случайного редактирования
+- Display current time with support for different time zones
+- Weather integration - show temperature and weather conditions for selected city
+- Customizable time format (12/24 hours)
+- Flexible date format settings with strftime syntax support
+- Automatic city detection or manual input
 
-### Быстрые ссылки (QuickLinksWidget)
+### Workspace (WorkflowPage)
 
-- Управление коллекцией полезных ссылок и ресурсов
-- Организация ссылок по категориям
-- Быстрый доступ к часто используемым ресурсам
+- Adaptive grid for widget placement
+- Toggle widget visibility
+- Drag and Drop interface
 
-### Виджет часов (WatchWidget)
+## 🔧 Settings
 
-- Отображение текущего времени с поддержкой различных часовых поясов
-- Интеграция с погодой - показ температуры и условий погоды для выбранного города
-- Настраиваемый формат времени (12/24 часов)
-- Гибкая настройка формата даты с поддержкой strftime синтаксиса
-- Автоматическое определение города или ручной ввод
+The application automatically saves user settings in localStorage:
 
-### Рабочая область (WorkflowPage)
-
-- Адаптивная сетка для размещения виджетов
-- Переключение видимости виджетов
-- Drag and Drop интерфейс
-
-## 🔧 Настройки
-
-Приложение автоматически сохраняет настройки пользователя в localStorage:
-
-- Позиции виджетов
-- Настройки и данные виджетов
-- Предпочтения темы
-- Выбранный фон
+- Widget positions
+- Widget settings and data
+- Theme preferences
+- Selected background
