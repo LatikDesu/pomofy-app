@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react'
-import { useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 
 import { LINKS } from '@/shared/constants'
 import { failureToast } from '@/shared/lib/toast'
@@ -59,7 +59,7 @@ export function AddLinkForm() {
 							<Input
 								type='text'
 								value={title}
-								onChange={e => setTitle(e.target.value)}
+								onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
 								className='w-full'
 								placeholder='Google'
 								autoFocus
@@ -69,7 +69,7 @@ export function AddLinkForm() {
 							<label className='mb-2 block text-sm font-medium'>URL</label>
 							<Input
 								value={url}
-								onChange={e => setUrl(e.target.value)}
+								onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)}
 								className='w-full'
 								placeholder='https://google.com'
 							/>
@@ -78,7 +78,7 @@ export function AddLinkForm() {
 							<label className='mb-2 block text-sm font-medium'>Иконка</label>
 							<Input
 								value={icon}
-								onChange={e => setIcon(e.target.value)}
+								onChange={(e: ChangeEvent<HTMLInputElement>) => setIcon(e.target.value)}
 								className='w-full'
 								placeholder='google, SiGoogle, FaPauseCircle'
 							/>
@@ -94,7 +94,9 @@ export function AddLinkForm() {
 								<label className='mb-2 block text-sm font-medium'>Группа (опционально)</label>
 								<Select
 									value={groupId || ''}
-									onChange={e => setGroupId(e.target.value || undefined)}
+									onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+										setGroupId(e.target.value || undefined)
+									}
 								>
 									<option value=''>Без группы</option>
 									{groups.map(group => (

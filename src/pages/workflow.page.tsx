@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 
 import { SettingsModal } from '@/features/SettingsModal'
 import { WidgetControlModal } from '@/features/WidgetControl'
@@ -17,15 +17,35 @@ import { usePosTimer, useToggleTimer } from '@/entities/Timer'
 import { usePosWatch, useToggleWatch } from '@/entities/Watch'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
 import { usePosYouTube, useYouTubeMusic } from '@/entities/YouTube'
-import { KanbanWidget } from '@/widgets/kanban'
-import { QuickLinksWidget } from '@/widgets/quick-links'
-import { SpotifyWidget } from '@/widgets/spotify'
-import { StickyNotesList } from '@/widgets/sticky-note'
-import { TaskTrackerWidget } from '@/widgets/task-tracker'
-import { TimerWidget } from '@/widgets/timer'
-import { WatchWidget } from '@/widgets/watch'
-import { YandexWidget } from '@/widgets/yandex-music'
-import { YouTubeWidget } from '@/widgets/youtube'
+
+// Lazy loading для виджетов
+const KanbanWidget = lazy(() =>
+	import('@/widgets/kanban').then((module) => ({ default: module.KanbanWidget }))
+)
+const QuickLinksWidget = lazy(() =>
+	import('@/widgets/quick-links').then((module) => ({ default: module.QuickLinksWidget }))
+)
+const SpotifyWidget = lazy(() =>
+	import('@/widgets/spotify').then((module) => ({ default: module.SpotifyWidget }))
+)
+const StickyNotesList = lazy(() =>
+	import('@/widgets/sticky-note').then((module) => ({ default: module.StickyNotesList }))
+)
+const TaskTrackerWidget = lazy(() =>
+	import('@/widgets/task-tracker').then((module) => ({ default: module.TaskTrackerWidget }))
+)
+const TimerWidget = lazy(() =>
+	import('@/widgets/timer').then((module) => ({ default: module.TimerWidget }))
+)
+const WatchWidget = lazy(() =>
+	import('@/widgets/watch').then((module) => ({ default: module.WatchWidget }))
+)
+const YandexWidget = lazy(() =>
+	import('@/widgets/yandex-music').then((module) => ({ default: module.YandexWidget }))
+)
+const YouTubeWidget = lazy(() =>
+	import('@/widgets/youtube').then((module) => ({ default: module.YouTubeWidget }))
+)
 
 export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -58,30 +78,46 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 			{!isDesktop ? (
 				<div className='ml-8 flex flex-col items-center'>
 					<div className={clsx(isWatchToggled ? 'block' : 'hidden')}>
-						<WatchWidget />
+						<Suspense fallback={<div className='h-20 w-full animate-pulse rounded bg-white/5' />}>
+							<WatchWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isTimerToggled ? 'block' : 'hidden')}>
-						<TimerWidget />
+						<Suspense fallback={<div className='h-20 w-full animate-pulse rounded bg-white/5' />}>
+							<TimerWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isTasksToggled ? 'block' : 'hidden')}>
-						<TaskTrackerWidget />
+						<Suspense fallback={<div className='h-32 w-full animate-pulse rounded bg-white/5' />}>
+							<TaskTrackerWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isKanbanToggled ? 'block' : 'hidden')}>
-						<KanbanWidget />
+						<Suspense fallback={<div className='h-96 w-full animate-pulse rounded bg-white/5' />}>
+							<KanbanWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isQuickLinksToggled ? 'block' : 'hidden')}>
-						<QuickLinksWidget />
+						<Suspense fallback={<div className='h-32 w-full animate-pulse rounded bg-white/5' />}>
+							<QuickLinksWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isYandexToggled ? 'block' : 'hidden')}>
-						<YandexWidget />
+						<Suspense fallback={<div className='h-24 w-full animate-pulse rounded bg-white/5' />}>
+							<YandexWidget />
+						</Suspense>
 					</div>
 					<div className={clsx(isSpotifyToggled ? 'block' : 'hidden')}>
-						<SpotifyWidget />
+						<Suspense fallback={<div className='h-24 w-full animate-pulse rounded bg-white/5' />}>
+							<SpotifyWidget />
+						</Suspense>
 					</div>
 				</div>
 			) : (
 				<>
-					<StickyNotesList />
+					<Suspense fallback={null}>
+						<StickyNotesList />
+					</Suspense>
 					<DWrapper
 						toggleHook={isTasksToggled && isTasksShown}
 						defaultX={taskPosX}
@@ -91,7 +127,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<TaskTrackerWidget />
+						<Suspense fallback={<div className='h-32 w-64 animate-pulse rounded bg-white/5' />}>
+							<TaskTrackerWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isTimerToggled && isTimerShown}
@@ -102,7 +140,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<TimerWidget />
+						<Suspense fallback={<div className='h-24 w-48 animate-pulse rounded bg-white/5' />}>
+							<TimerWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isWatchToggled && isWatchShown}
@@ -113,7 +153,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<WatchWidget />
+						<Suspense fallback={<div className='h-20 w-40 animate-pulse rounded bg-white/5' />}>
+							<WatchWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isYandexToggled && isYandexShown}
@@ -124,7 +166,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<YandexWidget />
+						<Suspense fallback={<div className='h-24 w-80 animate-pulse rounded bg-white/5' />}>
+							<YandexWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isSpotifyToggled && isSpotifyShown}
@@ -135,7 +179,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<SpotifyWidget />
+						<Suspense fallback={<div className='h-24 w-80 animate-pulse rounded bg-white/5' />}>
+							<SpotifyWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isYouTubeToggled && isYouTubeShown}
@@ -146,7 +192,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<YouTubeWidget />
+						<Suspense fallback={<div className='h-24 w-80 animate-pulse rounded bg-white/5' />}>
+							<YouTubeWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isQuickLinksToggled && isQuickLinksShown}
@@ -157,7 +205,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<QuickLinksWidget />
+						<Suspense fallback={<div className='h-32 w-64 animate-pulse rounded bg-white/5' />}>
+							<QuickLinksWidget />
+						</Suspense>
 					</DWrapper>
 					<DWrapper
 						toggleHook={isKanbanToggled && isKanbanShown}
@@ -168,7 +218,9 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						gridValues={grid}
 						handle='.handle'
 					>
-						<KanbanWidget />
+						<Suspense fallback={<div className='h-96 w-[800px] animate-pulse rounded bg-white/5' />}>
+							<KanbanWidget />
+						</Suspense>
 					</DWrapper>
 				</>
 			)}

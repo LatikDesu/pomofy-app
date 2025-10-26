@@ -1,5 +1,5 @@
 import { Pencil } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { type ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import { LINKS } from '@/shared/constants'
 import { Input, Select } from '@/shared/ui'
@@ -87,7 +87,7 @@ export function EditLinkForm({ link }: EditLinkFormProps) {
 									type='text'
 									placeholder='Google'
 									value={title}
-									onChange={e => setTitle(e.target.value as string)}
+									onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
 									autoFocus
 								/>
 							</div>
@@ -97,7 +97,7 @@ export function EditLinkForm({ link }: EditLinkFormProps) {
 									type='url'
 									placeholder='https://google.com'
 									value={url}
-									onChange={e => setUrl(e.target.value as string)}
+									onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)}
 								/>
 							</div>
 							<div>
@@ -106,7 +106,7 @@ export function EditLinkForm({ link }: EditLinkFormProps) {
 									type='text'
 									placeholder='google, SiGoogle, FaPauseCircle'
 									value={icon}
-									onChange={e => setIcon(e.target.value)}
+									onChange={(e: ChangeEvent<HTMLInputElement>) => setIcon(e.target.value)}
 								/>
 								<span className='text-text-default/70 mt-1 block text-xs'>
 									Используйте иконки{' '}
@@ -120,7 +120,9 @@ export function EditLinkForm({ link }: EditLinkFormProps) {
 									<label className='mb-2 block text-sm font-medium'>Группа (опционально)</label>
 									<Select
 										value={groupId || ''}
-										onChange={e => setGroupId(e.target.value || undefined)}
+										onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+											setGroupId(e.target.value || undefined)
+										}
 									>
 										<option value=''>Без группы</option>
 										{groups.map(group => (

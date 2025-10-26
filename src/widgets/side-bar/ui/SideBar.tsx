@@ -14,8 +14,6 @@ import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
-import { DraggableNavItem } from './DraggableNavItem'
-import { SideBarItem } from './SideBarItem'
 import { useToggleKanban } from '@/entities/Kanban'
 import { useToggleQuickLinks } from '@/entities/QuickLinks'
 import { useSpotifyMusic } from '@/entities/Spotify'
@@ -25,6 +23,8 @@ import { useToggleTimer } from '@/entities/Timer'
 import { useToggleWatch } from '@/entities/Watch'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -162,11 +162,11 @@ export const SideBar = () => {
 		{
 			id: '12',
 			content: <SquareKanban className='h-6 w-6' />,
-			tooltipTitle: 'Доска задач',
+			tooltipTitle: 'Канбан доска',
 			isToggled: isKanbanToggled,
 			setToggled: setIsKanbanToggled,
-			toggleString: 'Доска задач',
-			toggleIcon: '📃',
+			toggleString: 'Канбан доска',
+			toggleIcon: '📌',
 			isShown: isKanbanShown
 		}
 	]

@@ -1,8 +1,10 @@
 // @ts-nocheck
-import { useCallback, useRef } from 'react'
-import ReactPlayer from 'react-player'
+import { lazy, Suspense, useCallback, useRef } from 'react'
 
 import { useYouTubePlayer } from '@/entities/YouTube'
+
+// Lazy load ReactPlayer только когда он нужен
+const ReactPlayer = lazy(() => import('react-player'))
 
 interface YouTubePlayerProps {
 	videoUrl?: string
@@ -62,35 +64,37 @@ export function YouTubePlayer({
 
 	return (
 		<>
-			<ReactPlayer
-				ref={setPlayerRefCallback}
-				src={videoUrl}
-				playing={playing}
-				volume={volume}
-				muted={muted}
-				loop={loop}
-				playbackRate={playbackRate}
-				style={style}
-				controls={controls}
-				onReady={handleReady}
-				onPlay={handlePlay}
-				onPause={handlePause}
-				onTimeUpdate={handleTimeUpdate}
-				onDurationChange={handleDurationChange}
-				onEnded={onEnded}
-				onError={onError}
-				config={{
-					youtube: {
-						playerVars: {
-							modestbranding: 1,
-							rel: 0,
-							fs: 0,
-							iv_load_policy: 3,
-							disablekb: 1
+			<Suspense fallback={<div className='flex h-full w-full items-center justify-center'>Загрузка...</div>}>
+				<ReactPlayer
+					ref={setPlayerRefCallback}
+					src={videoUrl}
+					playing={playing}
+					volume={volume}
+					muted={muted}
+					loop={loop}
+					playbackRate={playbackRate}
+					style={style}
+					controls={controls}
+					onReady={handleReady}
+					onPlay={handlePlay}
+					onPause={handlePause}
+					onTimeUpdate={handleTimeUpdate}
+					onDurationChange={handleDurationChange}
+					onEnded={onEnded}
+					onError={onError}
+					config={{
+						youtube: {
+							playerVars: {
+								modestbranding: 1,
+								rel: 0,
+								fs: 0,
+								iv_load_policy: 3,
+								disablekb: 1
+							}
 						}
-					}
-				}}
-			/>
+					}}
+				/>
+			</Suspense>
 			{children}
 		</>
 	)

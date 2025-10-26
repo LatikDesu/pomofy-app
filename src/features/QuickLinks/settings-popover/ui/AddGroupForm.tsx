@@ -1,5 +1,5 @@
 import { FolderPlus, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 
 import { Input, SubmitButton } from '@/shared/ui'
 
@@ -66,7 +66,7 @@ export function AddGroupForm() {
 				className='cancelDrag w-full'
 				placeholder='Название группы'
 				value={name}
-				onChange={e => setName(e.target.value)}
+				onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
 				autoFocus
 			/>
 
