@@ -15,7 +15,12 @@ export default defineConfig(() => {
 				output: {
 					manualChunks: id => {
 						// React ecosystem
-						if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+						if (
+							id.includes('node_modules/react') ||
+							id.includes('node_modules/react-dom') ||
+							id.includes('node_modules/lucide-react') ||
+							id.includes('node_modules/react-icons')
+						) {
 							return 'vendor-react'
 						}
 
@@ -39,8 +44,7 @@ export default defineConfig(() => {
 						// UI библиотеки
 						if (
 							id.includes('node_modules/@radix-ui') ||
-							id.includes('node_modules/framer-motion') ||
-							id.includes('node_modules/lucide-react')
+							id.includes('node_modules/framer-motion')
 						) {
 							return 'vendor-ui'
 						}
