@@ -6,10 +6,8 @@ export const Background = {
 	COTTAGE: 4,
 	LOFIGIRL: 5,
 	TRAIN: 6,
-	DVD: 7,
 	CAMPFIRE: 8,
-	CUSTOM_COLOR: 9,
-	NYAN_CAT: 10
+	CUSTOM_COLOR: 9
 } as const
 
 export type Background = (typeof Background)[keyof typeof Background]

@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 
-import { useDragHandle } from '@/shared/ui'
+import { useDragHandle } from './Draggable'
 
 interface WidgetWrapperProps {
 	children: ReactNode

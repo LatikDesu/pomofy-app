@@ -1,6 +1,5 @@
 import { version } from '@Root/package.json'
 import { DndContext } from '@dnd-kit/core'
-import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import { Toaster } from 'react-hot-toast'
@@ -13,6 +12,7 @@ import { useDarkToggleStore, useSeoVisibilityStore } from '@/shared/store'
 import { useBreakStarted } from '@/entities/Timer'
 import { InfoSection, WorkflowPage } from '@/pages'
 import { SideBar } from '@/widgets/side-bar'
+import { Analytics } from '@vercel/analytics/react'
 
 function RootLayout() {
 	const isDark = useDarkToggleStore(state => state.isDark)
@@ -56,8 +56,8 @@ function RootLayout() {
 						breakStarted && 'bg-yellow-300/15'
 					)}
 				>
-					<Toaster />
 					<Analytics />
+					<Toaster />
 					<SideBar />
 					<WorkflowPage ref={workflowPageRef} />
 					<InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />

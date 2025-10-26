@@ -15,13 +15,14 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "framer-motion": "^12.23.22",
+        "lucide-react": "^0.545.0",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "react-hot-toast": "^2.6.0",
+        "react-icons": "^5.5.0",
         "react-markdown": "^10.1.0",
         "react-player": "^3.3.3",
         "react-textarea-autosize": "^8.5.9",
-        "react-tsparticles": "^2.12.2",
         "remark-gfm": "^4.0.1",
         "uuid": "^13.0.0",
         "zustand": "^5.0.8",
@@ -43,9 +44,7 @@
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-react-refresh": "^0.4.22",
         "globals": "^16.4.0",
-        "lucide-react": "^0.545.0",
         "prettier-plugin-tailwindcss": "^0.6.14",
-        "react-icons": "^5.5.0",
         "sass-embedded": "^1.93.2",
         "tailwind-merge": "^3.3.1",
         "tailwindcss": "^4.1.14",
@@ -1161,8 +1160,6 @@
 
     "react-textarea-autosize": ["react-textarea-autosize@8.5.9", "", { "dependencies": { "@babel/runtime": "^7.20.13", "use-composed-ref": "^1.3.0", "use-latest": "^1.2.1" }, "peerDependencies": { "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-U1DGlIQN5AwgjTyOEnI1oCcMuEr1pv1qOtklB2l4nyMGbHzWrI0eFsYK0zos2YWqAolJyG0IWJaqWmWj5ETh0A=="],
 
-    "react-tsparticles": ["react-tsparticles@2.12.2", "", { "dependencies": { "tsparticles-engine": "^2.12.0" }, "peerDependencies": { "react": ">=16" } }, "sha512-/nrEbyL8UROXKIMXe+f+LZN2ckvkwV2Qa+GGe/H26oEIc+wq/ybSG9REDwQiSt2OaDQGu0MwmA4BKmkL6wAWcA=="],
-
     "readdirp": ["readdirp@4.1.2", "", {}, "sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg=="],
 
     "redux": ["redux@5.0.1", "", {}, "sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w=="],
@@ -1330,8 +1327,6 @@
     "tsconfig-paths": ["tsconfig-paths@3.15.0", "", { "dependencies": { "@types/json5": "^0.0.29", "json5": "^1.0.2", "minimist": "^1.2.6", "strip-bom": "^3.0.0" } }, "sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg=="],
 
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
-
-    "tsparticles-engine": ["tsparticles-engine@2.12.0", "", {}, "sha512-ZjDIYex6jBJ4iMc9+z0uPe7SgBnmb6l+EJm83MPIsOny9lPpetMsnw/8YJ3xdxn8hV+S3myTpTN1CkOVmFv0QQ=="],
 
     "twitch-video-element": ["twitch-video-element@0.1.4", "", {}, "sha512-SDpZ4f7sZmwHF6XG5PF0KWuP18pH/kNG04MhTcpqJby7Lk/D3TS/lCYd+RSg0rIAAVi1LDgSIo1yJs9kmHlhgw=="],
 
