@@ -3,5 +3,6 @@ export const LINKS = {
 	GITHUB: 'https://github.com/latikdesu/pomofy-app',
 	LICENSE: 'https://opensource.org/license/mit/',
 	YANDEX_MUSIC: 'https://music.yandex.ru/',
-	SPOTIFY: 'https://open.spotify.com/'
+	SPOTIFY: 'https://open.spotify.com/',
+	SIMPLE_ICONS: 'https://simpleicons.org/'
 }

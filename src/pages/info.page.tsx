@@ -21,7 +21,7 @@ export const InfoSection = ({
 							Pomofy универсальное приложение для тайм-менеджмента и продуктивности на компьютере и
 							смартфоне. Оно основано на популярной «Технике Помидора» от{' '}
 							<span className='font-bold italic'>
-								<a href={LINKS.POMODORO} target='_blank'>
+								<a href={LINKS.POMODORO} target='_blank' rel='noreferrer'>
 									Франческо Чирилло{' '}
 								</a>
 							</span>{' '}
@@ -107,7 +107,7 @@ export const InfoSection = ({
 							{' '}
 							Загляните в репозиторий на GitHub{' '}
 							<span className='font-bold text-red-500'>
-								<a href={LINKS.GITHUB} target='_blank'>
+								<a href={LINKS.GITHUB} target='_blank' rel='noreferrer'>
 									здесь!
 								</a>
 							</span>
@@ -119,10 +119,20 @@ export const InfoSection = ({
 					<footer className='lg:text-lef bottom-0 bg-gray-900/[0.7] text-center text-sm'>
 						<ul className='pt-2 text-center text-purple-500/[0.75]'>
 							<li>
-								<a className='text-blue-500/[0.75]' href={LINKS.LICENSE} target='_blank'>
+								<a
+									className='text-blue-500/[0.75]'
+									href={LINKS.LICENSE}
+									target='_blank'
+									rel='noreferrer'
+								>
 									MIT License
 								</a>
-								<a className='text-blue-500/[0.75]' href={LINKS.GITHUB} target='_blank'>
+								<a
+									className='text-blue-500/[0.75]'
+									href={LINKS.GITHUB}
+									target='_blank'
+									rel='noreferrer'
+								>
 									{' - '}GitHub
 								</a>
 							</li>

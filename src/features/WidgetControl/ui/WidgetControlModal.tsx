@@ -1,4 +1,4 @@
-import { ListTodo, RotateCcw, Timer, WatchIcon } from 'lucide-react'
+import { Link, ListTodo, RotateCcw, Timer, WatchIcon } from 'lucide-react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { MdOutlineNoteAdd, MdWbSunny, MdWidgets } from 'react-icons/md'
 
@@ -11,6 +11,7 @@ import { NeumorphButton } from '@/shared/ui'
 import { Modal, ModalBody, ModalContent, ModalTrigger } from '@/shared/ui/Modal'
 
 import { WidgetButton } from './WidgetButton'
+import { useToggleQuickLinks } from '@/entities/QuickLinks'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
@@ -30,6 +31,7 @@ export const WidgetControlModal = () => {
 	const { isSpotifyShown, setIsSpotifyShown } = useSpotifyMusic()
 	const { isYouTubeShown, setIsYouTubeShown } = useYouTubeMusic()
 	const { isWatchShown, setIsWatchShown } = useToggleWatch()
+	const { isQuickLinksShown, setIsQuickLinksShown } = useToggleQuickLinks()
 	const isDesktop = useMediaQuery('(min-width: 641px)')
 	const isDark = useDarkToggleStore(state => state.isDark)
 
@@ -90,6 +92,12 @@ export const WidgetControlModal = () => {
 							onClick={() => setIsWatchShown(!isWatchShown)}
 							title='Часы'
 							icon={<WatchIcon className='h-6 w-6' />}
+						/>
+						<WidgetButton
+							isActive={isQuickLinksShown}
+							onClick={() => setIsQuickLinksShown(!isQuickLinksShown)}
+							title='Ссылки'
+							icon={<Link className='h-6 w-6' />}
 						/>
 						<WidgetButton
 							isActive={isDarkModeShown}

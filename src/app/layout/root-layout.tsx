@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast'
 
 import { Backgrounds } from '@/features/Backgrounds'
 
-import useSetDefault from '@/shared/lib/useSetDefault'
+import { useSetDefault } from '@/features/SetDefault'
 import { useDarkToggleStore, useSeoVisibilityStore } from '@/shared/store'
 
 import { useBreakStarted } from '@/entities/Timer'

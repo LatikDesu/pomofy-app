@@ -1,5 +1,6 @@
 import { type Linter } from 'eslint'
 import boundaries from 'eslint-plugin-boundaries'
+import importPlugin from 'eslint-plugin-import'
 
 type EslintBoundariesConfig = Linter.Config & {
 	settings: Record<string, unknown>
@@ -7,7 +8,8 @@ type EslintBoundariesConfig = Linter.Config & {
 
 export const eslintBoundariesConfig: EslintBoundariesConfig = {
 	plugins: {
-		boundaries
+		boundaries,
+		import: importPlugin
 	},
 	settings: {
 		'import/resolver': {
@@ -191,7 +193,7 @@ export const eslintBoundariesConfig: EslintBoundariesConfig = {
 							[
 								'shared',
 								{
-									segment: '(ui|api|types|icons)'
+									segment: '(ui|api|types|icons|lib|store|constants|assets)'
 								}
 							]
 						],

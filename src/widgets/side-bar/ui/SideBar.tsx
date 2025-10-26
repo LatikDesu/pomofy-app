@@ -1,5 +1,5 @@
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Clock, ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
+import { Clock, Link, ListTodo, RotateCcw, StickyNote, Timer } from 'lucide-react'
 import { useState } from 'react'
 import { BsArrowsFullscreen } from 'react-icons/bs'
 import { IoMenu } from 'react-icons/io5'
@@ -7,15 +7,14 @@ import { MdDarkMode, MdWbSunny } from 'react-icons/md'
 
 import { useToggleWidgetReset } from '@/features/ResetWidgetPosition'
 
+import { useSetDefault } from '@/features/SetDefault'
 import { SpotifyIcon, YandexIcon, YouTubeIcon } from '@/shared/icons'
 import { toggleFullScreen } from '@/shared/lib/fullscreen'
-import useSetDefault from '@/shared/lib/useSetDefault'
 import { useDarkToggleStore, useFullScreenToggleStore } from '@/shared/store'
 
 import { useSideNavOrderStore } from '../model/useSideNavOrder.store'
 
-import { DraggableNavItem } from './DraggableNavItem'
-import { SideBarItem } from './SideBarItem'
+import { useToggleQuickLinks } from '@/entities/QuickLinks'
 import { useSpotifyMusic } from '@/entities/Spotify'
 import { useStickyNote, useToggleStickyNote } from '@/entities/StickyNote'
 import { useToggleTasks } from '@/entities/Task'
@@ -23,6 +22,8 @@ import { useToggleTimer } from '@/entities/Timer'
 import { useToggleWatch } from '@/entities/Watch'
 import { useYandexMusic } from '@/entities/YandexMusic'
 import { useYouTubeMusic } from '@/entities/YouTube'
+import { DraggableNavItem } from './DraggableNavItem'
+import { SideBarItem } from './SideBarItem'
 
 export const SideBar = () => {
 	const [active, setActive] = useState(false)
@@ -31,7 +32,6 @@ export const SideBar = () => {
 	const { isDark, toggleDarkMode, isDarkModeShown } = useDarkToggleStore()
 	const { isTasksToggled, setIsTasksToggled, isTasksShown } = useToggleTasks()
 	const { isTimerToggled, setIsTimerToggled, isTimerShown } = useToggleTimer()
-	const { isWatchToggled, setIsWatchToggled, isWatchShown } = useToggleWatch()
 	const { isYandexToggled, setIsYandexToggled, isYandexShown } = useYandexMusic()
 	const { isSpotifyToggled, setIsSpotifyToggled, isSpotifyShown } = useSpotifyMusic()
 	const { isYouTubeToggled, setIsYouTubeToggled, isYouTubeShown } = useYouTubeMusic()
@@ -39,19 +39,21 @@ export const SideBar = () => {
 	const { isWidgetResetShown } = useToggleWidgetReset()
 	const { isStickyNoteShown } = useToggleStickyNote()
 	const { stickyNotes, addStickyNote } = useStickyNote()
+	const { isQuickLinksToggled, setIsQuickLinksToggled, isQuickLinksShown } = useToggleQuickLinks()
+	const { isWatchToggled, setIsWatchToggled, isWatchShown } = useToggleWatch()
 
 	let theme = isDark ? <MdWbSunny className='h-6 w-6' /> : <MdDarkMode className='h-6 w-6' />
 
 	const sideNavItems = [
 		{
 			id: '1',
-			content: <ListTodo className='h-6 w-6' />,
-			tooltipTitle: 'Трекер задач',
-			isToggled: isTasksToggled,
-			setToggled: setIsTasksToggled,
-			toggleString: 'Трекер задач',
-			toggleIcon: '📝',
-			isShown: isTasksShown
+			content: <Clock className='h-6 w-6' />,
+			tooltipTitle: 'Часы',
+			isToggled: isWatchToggled,
+			setToggled: setIsWatchToggled,
+			toggleString: 'Часы',
+			toggleIcon: '🕐',
+			isShown: isWatchShown
 		},
 		{
 			id: '2',
@@ -64,17 +66,17 @@ export const SideBar = () => {
 			isShown: isTimerShown
 		},
 		{
-			id: '10',
-			content: <Clock className='h-6 w-6' />,
-			tooltipTitle: 'Часы',
-			isToggled: isWatchToggled,
-			setToggled: setIsWatchToggled,
-			toggleString: 'Часы',
-			toggleIcon: '🕐',
-			isShown: isWatchShown
+			id: '3',
+			content: <ListTodo className='h-6 w-6' />,
+			tooltipTitle: 'Трекер задач',
+			isToggled: isTasksToggled,
+			setToggled: setIsTasksToggled,
+			toggleString: 'Трекер задач',
+			toggleIcon: '📝',
+			isShown: isTasksShown
 		},
 		{
-			id: '3',
+			id: '4',
 			content: <StickyNote className='h-6 w-6' />,
 			tooltipTitle: 'Заметки',
 			isToggled: stickyNotes.length > 0,
@@ -84,17 +86,47 @@ export const SideBar = () => {
 			isShown: isStickyNoteShown
 		},
 		{
-			id: '4',
-			content: <RotateCcw className='h-6 w-6' />,
-			tooltipTitle: 'Сбросить позиции',
-			isToggled: false,
-			setToggled: toggleDefaultPositions,
-			toggleString: 'Положение виджетов сброшено',
-			toggleIcon: '🔄',
-			isShown: isWidgetResetShown
+			id: '5',
+			content: <Link className='h-6 w-6' />,
+			tooltipTitle: 'Быстрые ссылки',
+			isToggled: isQuickLinksToggled,
+			setToggled: setIsQuickLinksToggled,
+			toggleString: 'Быстрые ссылки',
+			toggleIcon: '🔗',
+			isShown: isQuickLinksShown
 		},
 		{
-			id: '5',
+			id: '6',
+			content: <YandexIcon className='h-6 w-6' />,
+			tooltipTitle: 'Яндекс.Музыка',
+			isToggled: isYandexToggled,
+			setToggled: setIsYandexToggled,
+			toggleString: 'Яндекс. Музыка',
+			toggleIcon: '🎵',
+			isShown: isYandexShown
+		},
+		{
+			id: '7',
+			content: <SpotifyIcon className='h-6 w-6' />,
+			tooltipTitle: 'Spotify',
+			isToggled: isSpotifyToggled,
+			setToggled: setIsSpotifyToggled,
+			toggleString: 'Spotify',
+			toggleIcon: '🎵',
+			isShown: isSpotifyShown
+		},
+		{
+			id: '8',
+			content: <YouTubeIcon className='h-6 w-6' />,
+			tooltipTitle: 'YouTube',
+			isToggled: isYouTubeToggled,
+			setToggled: setIsYouTubeToggled,
+			toggleString: 'YouTube',
+			toggleIcon: '▶️',
+			isShown: isYouTubeShown
+		},
+		{
+			id: '9',
 			content: theme,
 			tooltipTitle: 'Тема',
 			isToggled: isDark,
@@ -104,7 +136,17 @@ export const SideBar = () => {
 			isShown: isDarkModeShown
 		},
 		{
-			id: '6',
+			id: '10',
+			content: <RotateCcw className='h-6 w-6' />,
+			tooltipTitle: 'Сбросить позиции',
+			isToggled: false,
+			setToggled: toggleDefaultPositions,
+			toggleString: 'Положение виджетов сброшено',
+			toggleIcon: '🔄',
+			isShown: isWidgetResetShown
+		},
+		{
+			id: '11',
 			content: <BsArrowsFullscreen className='h-6 w-6' />,
 			tooltipTitle: 'Полноэкранный режим',
 			isToggled: isFullscreen,
@@ -115,57 +157,7 @@ export const SideBar = () => {
 			toggleString: 'Полноэкранный режим',
 			toggleIcon: '',
 			isShown: isFullscreenShown
-		},
-		{
-			id: '7',
-			content: <YandexIcon className='h-6 w-6' />,
-			tooltipTitle: 'Яндекс.Музыка',
-			isToggled: isYandexToggled,
-			setToggled: setIsYandexToggled,
-			toggleString: 'Яндекс. Музыка',
-			toggleIcon: '🎵',
-			isShown: isYandexShown
-		},
-		{
-			id: '8',
-			content: <SpotifyIcon className='h-6 w-6' />,
-			tooltipTitle: 'Spotify',
-			isToggled: isSpotifyToggled,
-			setToggled: setIsSpotifyToggled,
-			toggleString: 'Spotify',
-			toggleIcon: '🎵',
-			isShown: isSpotifyShown
-		},
-		{
-			id: '9',
-			content: <YouTubeIcon className='h-6 w-6' />,
-			tooltipTitle: 'YouTube',
-			isToggled: isYouTubeToggled,
-			setToggled: setIsYouTubeToggled,
-			toggleString: 'YouTube',
-			toggleIcon: '▶️',
-			isShown: isYouTubeShown
 		}
-		// {
-		//   id: "9",
-		//   content: <BsFillChatLeftQuoteFill className="h-6 w-6" />,
-		//   tooltipTitle: "Quotes",
-		//   isToggled: isQuoteToggled,
-		//   setToggled: setIsQuoteToggled,
-		//   toggleString: "Quotes Toggled",
-		//   toggleIcon: "💬",
-		//   isShown: isQuoteShown,
-		// },
-		// {
-		//   id: "9",
-		//   content: <BsTwitch className="h-6 w-6" />,
-		//   tooltipTitle: "Twitch Stream",
-		//   isToggled: isTwitchToggled,
-		//   setToggled: setIsTwitchToggled,
-		//   toggleString: "Twitch Toggled",
-		//   toggleIcon: "📺",
-		//   isShown: isTwitchShown,
-		// },
 		// {
 		//   id: "11",
 		//   content: <MdOutlineViewKanban className="h-6 w-6" />,
@@ -175,16 +167,6 @@ export const SideBar = () => {
 		//   toggleString: "Kanban Toggled",
 		//   toggleIcon: "📃",
 		//   isShown: isKanbanShown,
-		// },
-		// {
-		//   id: "12",
-		//   content: <BsYoutube className="h-6 w-6" />,
-		//   tooltipTitle: "Youtube Video",
-		//   isToggled: isYoutubeToggled,
-		//   setToggled: setIsYoutubeToggled,
-		//   toggleString: "Youtube Toggled",
-		//   toggleIcon: "▶️",
-		//   isShown: isYoutubeShown,
 		// },
 	]
 

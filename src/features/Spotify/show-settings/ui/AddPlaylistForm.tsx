@@ -60,7 +60,7 @@ export function AddPlaylistForm() {
 				<ol className='ml-3 list-decimal space-y-0.5 text-[10px] opacity-80'>
 					<li>
 						Откройте плейлист на{' '}
-						<a href={LINKS.SPOTIFY} target='_blank'>
+						<a href={LINKS.SPOTIFY} target='_blank' rel='noreferrer'>
 							open.spotify.com{' '}
 						</a>
 					</li>

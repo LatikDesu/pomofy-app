@@ -1,6 +1,6 @@
+import { Loader2 } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
-import { Loader2 } from 'lucide-react'
 import { getFontSizeClasses } from '../lib/font-size-utils'
 import { useWatch } from '../model/watch.store'
 

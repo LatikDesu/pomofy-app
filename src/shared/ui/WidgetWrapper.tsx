@@ -21,7 +21,7 @@ export function WidgetWrapper({
 
 	return (
 		<div
-			className={`mb-2 w-72 rounded-lg bg-[var(--color-secondary)]/[.96] text-[var(--text-secondary)] shadow-md sm:w-96 dark:bg-[var(--color-default)]/[.96] dark:text-[var(--text-default)] ${className}`}
+			className={`bg-background-default text-text-default mb-2 w-72 rounded-lg shadow-md sm:w-96 ${className}`}
 			style={style}
 		>
 			<div className='relative flex w-full items-center justify-between px-3 pt-1'>

@@ -9,12 +9,14 @@ import { useGrid } from '@/shared/store'
 import { DWrapper } from '@/shared/ui'
 
 import { BackgroundModal } from '@/entities/Backgrounds'
+import { usePosQuickLinks, useToggleQuickLinks } from '@/entities/QuickLinks'
 import { usePosSpotify, useSpotifyMusic } from '@/entities/Spotify'
 import { usePosTask, useToggleTasks } from '@/entities/Task'
 import { usePosTimer, useToggleTimer } from '@/entities/Timer'
 import { usePosWatch, useToggleWatch } from '@/entities/Watch'
 import { usePosYandex, useYandexMusic } from '@/entities/YandexMusic'
 import { usePosYouTube, useYouTubeMusic } from '@/entities/YouTube'
+import { QuickLinksWidget } from '@/widgets/quick-links'
 import { SpotifyWidget } from '@/widgets/spotify'
 import { StickyNotesList } from '@/widgets/sticky-note'
 import { TaskTrackerWidget } from '@/widgets/task-tracker'
@@ -37,6 +39,8 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 	const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify()
 	const { isYouTubeToggled, isYouTubeShown } = useYouTubeMusic()
 	const { youtubePosX, youtubePosY, setYouTubePos } = usePosYouTube()
+	const { isQuickLinksToggled, isQuickLinksShown } = useToggleQuickLinks()
+	const { quickLinksPosX, quickLinksPosY, setQuickLinksPos } = usePosQuickLinks()
 	const { grid } = useGrid()
 
 	return (
@@ -49,14 +53,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 
 			{!isDesktop ? (
 				<div className='ml-8 flex flex-col items-center'>
+					<div className={clsx(isWatchToggled ? 'block' : 'hidden')}>
+						<WatchWidget />
+					</div>
 					<div className={clsx(isTimerToggled ? 'block' : 'hidden')}>
 						<TimerWidget />
 					</div>
 					<div className={clsx(isTasksToggled ? 'block' : 'hidden')}>
 						<TaskTrackerWidget />
 					</div>
-					<div className={clsx(isWatchToggled ? 'block' : 'hidden')}>
-						<WatchWidget />
+					<div className={clsx(isQuickLinksToggled ? 'block' : 'hidden')}>
+						<QuickLinksWidget />
 					</div>
 					<div className={clsx(isYandexToggled ? 'block' : 'hidden')}>
 						<YandexWidget />
@@ -133,6 +140,17 @@ export const WorkflowPage = React.forwardRef<HTMLDivElement>((_props, ref) => {
 						handle='.handle'
 					>
 						<YouTubeWidget />
+					</DWrapper>
+					<DWrapper
+						toggleHook={isQuickLinksToggled && isQuickLinksShown}
+						defaultX={quickLinksPosX}
+						defaultY={quickLinksPosY}
+						setPosition={setQuickLinksPos}
+						isSticky={false}
+						gridValues={grid}
+						handle='.handle'
+					>
+						<QuickLinksWidget />
 					</DWrapper>
 				</>
 			)}

@@ -1,20 +1,36 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import js from '@eslint/js'
+import react from 'eslint-plugin-react'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 import { eslintBoundariesConfig } from './eslint.boundaries.ts'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname
-})
-
 const eslintConfig = [
-	...compat.extends('next/core-web-vitals', 'next/typescript'),
 	{
-		ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts']
+		ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'dist/**']
+	},
+	js.configs.recommended,
+	...tseslint.configs.recommended,
+	{
+		files: ['**/*.{ts,tsx}'],
+		plugins: {
+			react
+		},
+		languageOptions: {
+			parserOptions: {
+				ecmaFeatures: {
+					jsx: true
+				}
+			},
+			globals: {
+				...globals.browser
+			}
+		},
+		rules: {
+			...react.configs.recommended.rules,
+			'react/react-in-jsx-scope': 'off',
+			'react/prop-types': 'off'
+		}
 	},
 	{ ...eslintBoundariesConfig, files: ['src/**/*.{ts,tsx}'] }
 ]

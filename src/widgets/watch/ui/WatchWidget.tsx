@@ -1,4 +1,4 @@
-import { WatchSettings } from '@/features/Watch/ui/WatchSettings'
+import { WatchSettings } from '@/features/Watch'
 
 import { CloseWidgetButton, WidgetWrapper } from '@/shared/ui'
 

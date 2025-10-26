@@ -42,6 +42,24 @@
 	--text-secondary: #36322f;
 }
 
+@theme {
+	--color-background-default: #ffffff;
+	--color-text-default: #36322f;
+	--color-hover-default: #f8f8f8;
+	--color-active-default: #f0f0f0;
+	--color-border-default: #e0e0e0;
+
+	--color-background-danger: #e6492d;
+	--color-background-primary: #2c7be5;
+}
+.dark {
+	--color-background-default: #36322f;
+	--color-text-default: #ffffff;
+	--color-hover-default: #4a4542;
+	--color-active-default: #2a2724;
+	--color-border-default: #e0e0e0;
+}
+
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {
 	display: none;
